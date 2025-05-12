@@ -99,7 +99,8 @@ const CompoundContracts = ({ compoundEstates }) => {
       filteredContractsList,
       "CurrentContracts.xlsx",
       "CurrentContracts",
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [filteredContractsList, accountInfo]);
 

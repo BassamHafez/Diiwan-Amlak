@@ -151,7 +151,8 @@ const OperationalReport = ({
       filteredContractsReport,
       `${key(filterType)}.xlsx`,
       `${key(filterType)}`,
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [filteredContractsReport, accountInfo, filterType, key]);
 
@@ -161,7 +162,8 @@ const OperationalReport = ({
       `${key("contractsReport")}_(${dataEnteried?.startDueDate}) (${
         dataEnteried?.endDueDate
       }) ${dataEnteried?.estate || dataEnteried.compound || ""}`,
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [dataEnteried, accountInfo, key]);
 

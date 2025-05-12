@@ -3,7 +3,7 @@ import styles from "./Contracts.module.css";
 import { useState } from "react";
 import ModalForm from "../../../Components/UI/Modals/ModalForm";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import {mainFormsHandlerTypeRaw } from "../../../util/Http";
+import { mainFormsHandlerTypeRaw } from "../../../util/Http";
 import { useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
@@ -216,7 +216,9 @@ const CurrentContract = ({ details, estateParentCompound, refetchDetails }) => {
               contractDetails.contract?._id,
               `${key("contract")}_${details?.name}(${
                 estateParentCompound?.name
-              })_${contractDetails?.tenant?.name}`,accountInfo?.account?.isFilesExtractAllowed
+              })_${contractDetails?.tenant?.name}`,
+              accountInfo?.account?.isFilesExtractAllowed,
+              accountInfo?.account?.isVIP
             )
           }
           title={key("contractDetails")}

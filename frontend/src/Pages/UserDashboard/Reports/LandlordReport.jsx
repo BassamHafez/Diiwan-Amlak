@@ -135,7 +135,8 @@ const LandlordReport = ({
       filteredReportsData,
       `${key(filterType)}.xlsx`,
       `${key(filterType)}`,
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [filteredReportsData, accountInfo, filterType, key]);
 
@@ -147,7 +148,8 @@ const LandlordReport = ({
       }) (${dataEnteried.endDate || dataEnteried.endDueDate || ""}) ${
         dataEnteried?.estate || dataEnteried.compound || ""
       }`,
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [dataEnteried, accountInfo, filterType, key]);
 

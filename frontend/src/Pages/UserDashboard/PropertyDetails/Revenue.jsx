@@ -10,10 +10,7 @@ import {
 import { memo, useCallback, useMemo, useState } from "react";
 import ModalForm from "../../../Components/UI/Modals/ModalForm";
 import { useQuery } from "@tanstack/react-query";
-import {
-  mainEmptyBodyFun,
-  mainFormsHandlerTypeRaw,
-} from "../../../util/Http";
+import { mainEmptyBodyFun, mainFormsHandlerTypeRaw } from "../../../util/Http";
 import { useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
@@ -214,9 +211,10 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
         estateParentCompound ? `_(${estateParentCompound?.name})` : ""
       }.xlsx`,
       key("revenues"),
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
-  }, [filteredRevenuesList,accountInfo, details, key, estateParentCompound]);
+  }, [filteredRevenuesList, accountInfo, details, key, estateParentCompound]);
 
   const showAddModalHandler = useCallback(() => {
     setShowAddRevenueModal(true);
@@ -525,7 +523,8 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
             generatePDF(
               revDetails._id,
               "revenueDetails",
-              accountInfo?.account?.isFilesExtractAllowed
+              accountInfo?.account?.isFilesExtractAllowed,
+              accountInfo?.account?.isVIP
             )
           }
           title={key("revenueDetails")}
@@ -555,7 +554,8 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
               `${key("cashReceipt")}_${details?.name}(${
                 estateParentCompound.name
               })_${revDetails?.tenant?.name}`,
-              accountInfo?.account?.isFilesExtractAllowed
+              accountInfo?.account?.isFilesExtractAllowed,
+              accountInfo?.account?.isVIP
             )
           }
           title={key("cashReceipt")}
@@ -581,7 +581,8 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
               `${key("taxInvoice")}_${details?.name} ${
                 estateParentCompound ? `(${estateParentCompound?.name})` : ""
               }_${revDetails?.tenant?.name}`,
-              accountInfo?.account?.isFilesExtractAllowed
+              accountInfo?.account?.isFilesExtractAllowed,
+              accountInfo?.account?.isVIP
             )
           }
           title={key("taxInvoice")}

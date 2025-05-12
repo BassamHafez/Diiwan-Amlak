@@ -47,7 +47,6 @@ const Tasks = () => {
     staleTime: Infinity,
     enabled: !!isTasksAllowed && !!token,
   });
-
   return (
     <>
       <div className={`${styles.main_container} height_container`}>

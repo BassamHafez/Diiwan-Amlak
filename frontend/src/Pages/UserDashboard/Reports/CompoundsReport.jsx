@@ -84,7 +84,8 @@ const CompoundsReport = ({ compoundsOptions, landlordOptions, filterType }) => {
       filteredData,
       `${key(filterType)}.xlsx`,
       `${key(filterType)}`,
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [filteredData, accountInfo, filterType, key]);
 
@@ -94,7 +95,8 @@ const CompoundsReport = ({ compoundsOptions, landlordOptions, filterType }) => {
       `${key(filterType)}_(${dataEnteried.startDate || ""}) (${
         dataEnteried.endDate || ""
       })`,
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [dataEnteried, accountInfo, filterType, key]);
 

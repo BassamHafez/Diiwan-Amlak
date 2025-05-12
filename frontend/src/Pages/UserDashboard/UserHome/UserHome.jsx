@@ -28,7 +28,11 @@ const UserHome = () => {
   const token = useSelector((state) => state.userInfo.token);
   const isTimeExpired = useSelector((state) => state.packageTime.isTimeExpired);
   const accountInfo = useSelector((state) => state.accountInfo.data);
-  const isAnalysisAllowed = accountInfo?.account?.isAnalysisAllowed;
+  const isAnalysisAllowed = accountInfo?.account?.isVIP
+    ? true
+    : accountInfo?.account?.isAnalysisAllowed
+    ? true
+    : false;
   const { t: key } = useTranslation();
   const navigate = useNavigate();
 

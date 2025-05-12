@@ -206,7 +206,8 @@ const Expenses = ({
         estateParentCompound ? `_(${estateParentCompound?.name})` : ""
       }.xlsx`,
       "expenses",
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [filteredExpensesList, accountInfo, estateParentCompound, key, details]);
 
@@ -505,7 +506,8 @@ const Expenses = ({
             generatePDF(
               exDetails._id,
               "ExpenseDetails",
-              accountInfo?.account?.isFilesExtractAllowed
+              accountInfo?.account?.isFilesExtractAllowed,
+              accountInfo?.account?.isVIP
             )
           }
           title={key("expensesDetails")}

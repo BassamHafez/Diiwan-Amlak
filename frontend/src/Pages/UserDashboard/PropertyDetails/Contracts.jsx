@@ -153,7 +153,8 @@ const Contracts = ({ details, estateParentCompound, refetchDetails }) => {
         estateParentCompound ? `_(${estateParentCompound?.name})` : ""
       }.xlsx`,
       key("contracts"),
-      accountInfo?.account?.isFilesExtractAllowed
+      accountInfo?.account?.isFilesExtractAllowed,
+      accountInfo?.account?.isVIP
     );
   }, [filteredContractsList, accountInfo, details, estateParentCompound, key]);
 
@@ -448,7 +449,8 @@ const Contracts = ({ details, estateParentCompound, refetchDetails }) => {
               `${key("contract")}_${details?.name}${
                 estateParentCompound ? `(${estateParentCompound?.name})` : ""
               }_${contractDetails?.tenant?.name}`,
-              accountInfo?.account?.isFilesExtractAllowed
+              accountInfo?.account?.isFilesExtractAllowed,
+              accountInfo?.account?.isVIP
             )
           }
           title={key("contractDetails")}

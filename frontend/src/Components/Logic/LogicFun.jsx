@@ -73,6 +73,7 @@ export const convertNumbersToFixedTwo = (num) => {
 };
 
 export const checkAccountFeatures = (accInfo, value) => {
+  if (accInfo.isVIP) return true;
   const feature = accInfo[value];
   return typeof feature === "number" ? feature > 0 : Boolean(feature);
 };
@@ -86,9 +87,10 @@ export const handleDownloadExcelSheet = (
   data,
   name,
   title,
-  isFilesExtractAllowed
+  isFilesExtractAllowed,
+  isVIP
 ) => {
-  if (isFilesExtractAllowed === false) {
+  if (isFilesExtractAllowed === false && !isVIP) {
     notifyError();
     return;
   }
@@ -99,8 +101,8 @@ export const handleDownloadExcelSheet = (
   XLSX.writeFile(wb, `${name}`);
 };
 
-export const generatePDF = (id, name, isFilesExtractAllowed) => {
-  if (isFilesExtractAllowed === false) {
+export const generatePDF = (id, name, isFilesExtractAllowed, isVIP) => {
+  if (isFilesExtractAllowed === false && !isVIP) {
     notifyError();
     return;
   }
@@ -145,7 +147,6 @@ export const filterAndRenameKeys = (
     return filteredItem;
   });
 };
-
 
 // estates
 const estateStatus = {

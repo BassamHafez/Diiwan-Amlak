@@ -167,7 +167,8 @@ const CompoundDetailsReports = ({ compoundsOptions, filterType }) => {
                           [filteredCompoundDetail],
                           `${key(filterType)}.xlsx`,
                           `${key(filterType)}`,
-                          accountInfo?.account?.isFilesExtractAllowed
+                          accountInfo?.account?.isFilesExtractAllowed,
+                          accountInfo?.account?.isVIP
                         )
                       }
                     />
@@ -180,7 +181,8 @@ const CompoundDetailsReports = ({ compoundsOptions, filterType }) => {
                           }) (${dataEnteried?.endDate}) ${
                             dataEnteried.compound || ""
                           }`,
-                          accountInfo?.account?.isFilesExtractAllowed
+                          accountInfo?.account?.isFilesExtractAllowed,
+                          accountInfo?.account?.isVIP
                         )
                       }
                       classes="m-2 bg-navy"
