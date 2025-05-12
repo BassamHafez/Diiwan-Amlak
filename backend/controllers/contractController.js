@@ -1,4 +1,3 @@
-const Account = require("../models/accountModel");
 const Contract = require("../models/contractModel");
 const Estate = require("../models/estateModel");
 const Compound = require("../models/compoundModel");
@@ -45,9 +44,13 @@ exports.createContract = catchAsync(async (req, res, next) => {
   const { estateId } = req.params;
 
   const newStartDate = new Date(req.body.startDate);
-  newStartDate.setHours(0, 0, 0, 0);
   const newEndDate = new Date(req.body.endDate);
-  newEndDate.setHours(23, 59, 59, 999);
+
+  const localStartDate = new Date(newStartDate.toLocaleString());
+  const localEndDate = new Date(newEndDate.toLocaleString());
+
+  newStartDate.setHours(localStartDate.getHours(), 0, 0, 0);
+  newEndDate.setHours(localEndDate.getHours(), 23, 59, 59);
 
   if (newStartDate >= newEndDate) {
     return next(new ApiError("Start date must be before end date", 400));
@@ -238,9 +241,13 @@ exports.updateContract = catchAsync(async (req, res, next) => {
   const { estateId, id } = req.params;
 
   const newStartDate = new Date(req.body.startDate);
-  newStartDate.setHours(0, 0, 0, 0);
   const newEndDate = new Date(req.body.endDate);
-  newEndDate.setHours(23, 59, 59, 999);
+
+  const localStartDate = new Date(newStartDate.toLocaleString());
+  const localEndDate = new Date(newEndDate.toLocaleString());
+
+  newStartDate.setHours(localStartDate.getHours(), 0, 0, 0);
+  newEndDate.setHours(localEndDate.getHours(), 23, 59, 59);
 
   if (newStartDate >= newEndDate) {
     return next(new ApiError("Start date must be before end date", 400));
@@ -376,7 +383,8 @@ exports.extendContract = catchAsync(async (req, res, next) => {
   const { endDate } = req.body;
 
   const newEndDate = new Date(endDate);
-  newEndDate.setHours(23, 59, 59, 999);
+  const localEndDate = new Date(newEndDate.toLocaleString());
+  newEndDate.setHours(localEndDate.getHours(), 23, 59, 59);
 
   const [estate, contract] = await Promise.all([
     Estate.findById(estateId).select("_id name").lean(),
@@ -500,8 +508,9 @@ exports.settleContract = catchAsync(async (req, res, next) => {
     return next(new ApiError("Contract is already canceled", 400));
   }
 
-  const endOfDay = new Date();
-  endOfDay.setHours(23, 59, 59, 999);
+  const endOfDay = new Date(endDate);
+  const localEndDate = new Date(endOfDay.toLocaleString());
+  endOfDay.setHours(localEndDate.getHours(), 23, 59, 59);
 
   // const isActiveContract = contract.status === "active" ? true : false;
   const now = new Date();
