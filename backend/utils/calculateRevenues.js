@@ -1,4 +1,4 @@
-const { addMonths, differenceInMonths, format } = require("date-fns");
+const { addMonths, addYears, differenceInMonths, format } = require("date-fns");
 
 const calculateRevenues = (contract) => {
   const revenues = [];
