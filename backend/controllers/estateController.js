@@ -346,7 +346,7 @@ exports.deleteEstate = catchAsync(async (req, res, next) => {
 
 exports.favoriteEstate = catchAsync(async (req, res, next) => {
   const account = await Account.findById(req.user.account)
-    .select("isFavoriteAllowed subscriptionEndDate")
+    .select("isFavoriteAllowed subscriptionEndDate isVIP")
     .lean();
 
   if (account.subscriptionEndDate < new Date()) {
