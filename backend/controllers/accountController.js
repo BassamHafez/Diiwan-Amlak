@@ -706,11 +706,30 @@ exports.addVIP = catchAsync(async (req, res, next) => {
     Date.now() + req.body.months * 30.25 * 24 * 60 * 60 * 1000 // 30 days + 6 hours
   );
 
+  const vipAccountInfo = {
+    isVIP: true,
+    subscriptionEndDate: expireDate,
+    isFavoriteAllowed: true,
+    isRemindersAllowed: true,
+    isAnalysisAllowed: true,
+    isFinancialReportsAllowed: true,
+    isOperationalReportsAllowed: true,
+    isCompoundsReportsAllowed: true,
+    isTasksAllowed: true,
+    isFilesExtractAllowed: true,
+    isServiceContactsAllowed: true,
+    isUserPermissionsAllowed: true,
+    allowedUsers: Infinity,
+    allowedCompounds: Infinity,
+    allowedEstates: Infinity,
+    maxEstatesInCompound: Infinity,
+  };
+
   const [updatedAccount] = await Promise.all([
-    Account.findByIdAndUpdate(id, {
-      isVIP: true,
-      subscriptionEndDate: expireDate,
-    }).populate("owner", "name phone email"),
+    Account.findByIdAndUpdate(id, vipAccountInfo).populate(
+      "owner",
+      "name phone email"
+    ),
 
     ScheduledMission.deleteOne({
       account: id,
