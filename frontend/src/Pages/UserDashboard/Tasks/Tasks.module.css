@@ -20,7 +20,9 @@
   border-radius: 1.25rem;
   overflow: hidden;
 }
-
+.filter_list{
+  padding: 0;
+}
 .filter_list li {
   padding: 0.3125rem 0.3125rem;
   border-radius: 0.3125rem;
