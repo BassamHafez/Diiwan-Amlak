@@ -719,10 +719,10 @@ exports.addVIP = catchAsync(async (req, res, next) => {
     isFilesExtractAllowed: true,
     isServiceContactsAllowed: true,
     isUserPermissionsAllowed: true,
-    allowedUsers: Infinity,
-    allowedCompounds: Infinity,
-    allowedEstates: Infinity,
-    maxEstatesInCompound: Infinity,
+    allowedUsers: Number.MAX_SAFE_INTEGER,
+    allowedCompounds: Number.MAX_SAFE_INTEGER,
+    allowedEstates: Number.MAX_SAFE_INTEGER,
+    maxEstatesInCompound: Number.MAX_SAFE_INTEGER,
   };
 
   const [updatedAccount] = await Promise.all([
