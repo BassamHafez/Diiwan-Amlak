@@ -68,7 +68,7 @@ const PackageItem = ({ pack, type }) => {
       setSubCost(res.data?.amount);
       setIsLoading(false);
       setPaymentUrl(res.data?.paymentUrl);
-      localStorage.setItem("paymentId", res.data?.purchaseId);
+      sessionStorage.setItem("paymentId", res.data?.purchaseId);
       setShowPackageData(true);
     } else {
       handlePackageErrors(res.response?.data?.message);

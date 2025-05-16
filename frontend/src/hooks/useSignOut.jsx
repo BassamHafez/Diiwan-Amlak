@@ -11,10 +11,6 @@ const useSignOut = () => {
     localStorage.removeItem("role");
     localStorage.removeItem("token");
     localStorage.removeItem("lastNotificationTime");
-    if (localStorage.getItem("paymentId")) {
-      localStorage.removeItem("paymentId");
-    }
-
     dispatch(userActions.setRole(""));
     dispatch(userActions.setIsLogin(false));
     dispatch(saveIsLoginState(false));
