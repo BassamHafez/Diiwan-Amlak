@@ -1,11 +1,7 @@
 import { useDispatch, useNavigate, useTranslation } from "../shared/hooks";
 import { toast } from "../shared/constants";
-import saveUserInfoIntoLocalStorag, {
-  saveIsLoginState,
-  saveRoleState,
-  saveTokenState,
-} from "../Store/userInfo-actions";
 import { userActions } from "../Store/userInfo-slice";
+import { saveRoleState, saveTokenState } from "../Store/userInfo-actions";
 
 const useSaveLoginData = () => {
   const dispatch = useDispatch();
@@ -18,13 +14,10 @@ const useSaveLoginData = () => {
     const user = res?.data?.user;
     const token = res?.token;
     dispatch(userActions.setUserInfo(user));
-    dispatch(userActions.setIsLogin(true));
     dispatch(userActions.setRole(role));
     dispatch(userActions.setToken(token));
-    dispatch(saveUserInfoIntoLocalStorag(user));
-    dispatch(saveIsLoginState(true));
-    dispatch(saveRoleState(role));
     dispatch(saveTokenState(token));
+    dispatch(saveRoleState(role));
     notifySuccess(key("logged"));
     if (role !== "admin") {
       navigate("/properties");

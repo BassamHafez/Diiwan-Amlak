@@ -24,7 +24,7 @@ const Root = () => {
   const profileInfo = useSelector((state) => state.profileInfo.data);
   const accountInfo = useSelector((state) => state.accountInfo.data);
   const isPhoneVerified = profileInfo?.phoneVerified;
-  const isLogin = useSelector((state) => state.userInfo.isLogin);
+  const token = useSelector((state) => state.userInfo.token);
   const role = useSelector((state) => state.userInfo.role);
   const mainColor = useSelector((state) => state.configs.mainColor);
   const subColor = useSelector((state) => state.configs.subColor);
@@ -34,7 +34,7 @@ const Root = () => {
   //phone notifications
   useEffect(() => {
     let interval;
-    if (isLogin && isPhoneVerified === false) {
+    if (token && isPhoneVerified === false) {
       showPhoneAlertNotification();
       interval = setInterval(showPhoneAlertNotification, mainAlertTime);
     }
@@ -43,7 +43,7 @@ const Root = () => {
         clearInterval(interval);
       }
     };
-  }, [isLogin, isPhoneVerified]);
+  }, [token, isPhoneVerified]);
 
   useEffect(() => {
     if (mainColor) {
@@ -56,12 +56,12 @@ const Root = () => {
 
   //package's remaining time
   useEffect(() => {
-    if (subscriptionEndDate && isLogin && role !== "admin") {
+    if (subscriptionEndDate && token && role !== "admin") {
       const remainingTime = calculateRemainingTime(subscriptionEndDate);
       const isExpired = remainingTime === 0;
       dispatch(packageTimeActions.setIsPackageTimeExpired(isExpired));
     }
-  }, [subscriptionEndDate, dispatch, isLogin, role]);
+  }, [subscriptionEndDate, dispatch, token, role]);
 
   if (!isOnline) {
     return <NetworkError />;
@@ -84,7 +84,7 @@ const Root = () => {
       <MainNav />
       <Outlet />
       <MainFooter />
-      <ScrollRestoration/>
+      <ScrollRestoration />
     </>
   );
 };

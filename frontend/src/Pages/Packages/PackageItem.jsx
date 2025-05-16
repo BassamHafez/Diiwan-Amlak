@@ -22,7 +22,6 @@ const PackageItem = ({ pack, type }) => {
   const [subCost, setSubCost] = useState(0);
   const token = useSelector((state) => state.userInfo.token);
   const accountInfo = useSelector((state) => state.accountInfo.data);
-  const isLogin = useSelector((state) => state.userInfo.isLogin);
 
   const { t: key } = useTranslation();
   let isArLang = localStorage.getItem("i18nextLng") === "ar";
@@ -77,7 +76,7 @@ const PackageItem = ({ pack, type }) => {
   };
 
   const subscribtionHandler = () => {
-    if (!isLogin) {
+    if (!token) {
       setShowLoginModal(true);
       return;
     }
