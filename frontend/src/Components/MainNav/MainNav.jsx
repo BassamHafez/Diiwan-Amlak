@@ -33,7 +33,9 @@ const MainNav = () => {
   const { t } = useTranslation();
   let isArLang = localStorage.getItem("i18nextLng") === "ar";
   const navigate = useNavigate();
-  const isLogin = useSelector((state) => state.userInfo.isLogin);
+  const token =
+    useSelector((state) => state.userInfo.token) ||
+    localStorage.getItem("token");
   const profileInfo = useSelector((state) => state.profileInfo.data);
 
   const generalLinks = useMemo(
@@ -80,7 +82,7 @@ const MainNav = () => {
               }`}
               navbarScroll
             >
-              {isLogin ? (
+              {token ? (
                 <>
                   {loggedInLinks?.map((link, index) => (
                     <NavLink
@@ -156,7 +158,7 @@ const MainNav = () => {
             </Nav>
             <div className={styles.nav_controller}>
               <LanguageChanger />
-              {!isLogin ? (
+              {!token ? (
                 <div className="d-flex align-items-center justify-content-center flex-wrap">
                   <ButtonOne
                     onClick={() => {

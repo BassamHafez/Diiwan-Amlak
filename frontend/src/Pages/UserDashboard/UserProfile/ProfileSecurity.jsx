@@ -2,17 +2,15 @@ import styles from "./UserProfile.module.css";
 import SecurityForm from "./ProfileForms/SecurityForm";
 import { mainDeleteFunHandler } from "../../../util/Http";
 import { useNavigate } from "react-router-dom";
-import { userActions } from "../../../Store/userInfo-slice";
-import { saveIsLoginState } from "../../../Store/userInfo-actions";
 import { MainModal } from "../../../shared/components";
 import { passImage } from "../../../shared/images";
 import { Col, Row } from "../../../shared/bootstrap";
 import { toast } from "../../../shared/constants";
 import {
   useState,
-  useDispatch,
   useSelector,
   useTranslation,
+  useSignOut,
 } from "../../../shared/hooks";
 import DeleteUserForm from "./ProfileForms/DeleteUserForm";
 
@@ -21,18 +19,13 @@ const ProfileSecurity = () => {
   const [showDeActivateModal, setShowDeActivateModal] = useState(false);
   const token = useSelector((state) => state.userInfo.token);
   const profileInfo = useSelector((state) => state.profileInfo.data);
-  const dispatch = useDispatch();
+  const signOut = useSignOut();
   const navigate = useNavigate();
   const notifySuccess = (message) => toast.success(message);
   const notifyError = (message) => toast.error(message);
 
   const LogOutProcess = () => {
-    localStorage.removeItem("userData");
-    dispatch(userActions.setRole(""));
-    localStorage.removeItem("role");
-    localStorage.removeItem("token");
-    dispatch(userActions.setIsLogin(false));
-    dispatch(saveIsLoginState(false));
+    signOut();
     navigate("/login");
   };
 

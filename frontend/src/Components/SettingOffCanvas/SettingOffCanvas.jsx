@@ -81,7 +81,7 @@ const SettingOffCanvas = ({ show, handleClose }) => {
                   isArLang ? "me-3" : "ms-3"
                 } d-flex justify-content-center flex-column`}
               >
-                <span className={styles.profile_name}>{profileInfo?.name}</span>
+                <span className={styles.profile_name}>{profileInfo?.name||key("you")}</span>
                 <span className={styles.user_email}>{profileInfo?.email}</span>
               </div>
             </div>

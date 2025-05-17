@@ -6,10 +6,11 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getisLoginState,
   getRoleState,
+  // getisLoginState,
+  // getRoleState,
   getToken,
-  getUserInfoFromLocalStorage,
+  // getUserInfoFromLocalStorage,
 } from "./Store/userInfo-actions";
 import fetchProfileData from "./Store/profileInfo-actions";
 import fetchAccountData from "./Store/accountInfo-actions";
@@ -333,14 +334,10 @@ function App() {
 
   // recieve user data from localStorage with login and role states
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("userData"))) {
-      dispatch(getUserInfoFromLocalStorage());
-    }
     if (JSON.parse(localStorage.getItem("token"))) {
       dispatch(getRoleState());
       dispatch(getToken());
     }
-    dispatch(getisLoginState());
   }, [dispatch]);
 
   return (

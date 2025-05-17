@@ -20,17 +20,11 @@ const PaymentResponse = () => {
     useSelector((state) => state.userInfo.token) ||
     JSON.parse(localStorage.getItem("token"));
   const profileInfo = useSelector((state) => state.profileInfo.data);
-  const paymentId = localStorage.getItem("paymentId");
+  const paymentId = sessionStorage.getItem("paymentId");
   const { t: key } = useTranslation();
   const navigate = useNavigate();
   const { status } = useParams();
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   return () => {
-  //     localStorage.removeItem("paymentId");
-  //   };
-  // }, []);
 
   const { data, isFetching } = useQuery({
     queryKey: ["paymentResponse", token],
@@ -42,7 +36,7 @@ const PaymentResponse = () => {
     enabled: !!paymentId && !!token,
     staleTime: Infinity,
   });
-
+console.log(data)
   useEffect(() => {
     if (data && data.status === "COMPLETED" && status === "success") {
       dispatch(fetchAccountData(token));

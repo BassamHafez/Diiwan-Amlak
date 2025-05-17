@@ -84,7 +84,7 @@ const CustomPackageItem = ({
       if (res.status === "success") {
         setSubCost(res.data?.amount);
         setPaymentUrl(res.data?.paymentUrl);
-        localStorage.setItem("paymentId", res.data?.purchaseId);
+        sessionStorage.setItem("paymentId", res.data?.purchaseId);
         setShowPackageData(true);
       } else {
         handleSubscriptionErrors(res.response?.data?.message);
