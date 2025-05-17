@@ -358,6 +358,10 @@ exports.subscribe = catchAsync(async (req, res, next) => {
   const { order } = data;
   const { ref, url } = order;
 
+  if (!ref || !url) {
+    return next(new ApiError("Error getting payment link", 500));
+  }
+
   await Purchase.create({
     _id: purchaseId,
     account: id,
@@ -485,8 +489,17 @@ exports.subscribeInPackage = catchAsync(async (req, res, next) => {
   };
 
   const { data } = await axios.request(options);
+
+  if (!data || data.error || !data.order) {
+    return next(new ApiError("Error getting payment link", 500));
+  }
+
   const { order } = data;
   const { ref, url } = order;
+
+  if (!ref || !url) {
+    return next(new ApiError("Error getting payment link", 500));
+  }
 
   const expireDate = new Date(
     Date.now() + package.duration * 30.25 * 24 * 60 * 60 * 1000 // 30 days + 6 hours
