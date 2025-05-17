@@ -54,10 +54,7 @@ p {
   overflow-wrap: break-word;
 }
 .hidden_img {
-  visibility: hidden;
-  position: absolute;
-  width: 0;
-  height: 0;
+  display: none;
 }
 /* bootstrap */
 .dropdown-toggle::after {
@@ -378,8 +375,6 @@ p {
   transform: scaleX(1);
   transition: all 0.3s ease;
 }
-
-
 
 @keyframes check-15 {
   50% {
