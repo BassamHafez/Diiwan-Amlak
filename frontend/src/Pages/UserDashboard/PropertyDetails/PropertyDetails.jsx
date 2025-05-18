@@ -258,7 +258,7 @@ const PropertyDetails = () => {
                         <div className={styles.main_details}>
                           <span>{key("totalPaidRevenues")}</span>
                           <p>
-                            {totalPaidRev} {key("sarSmall")}
+                            {totalPaidRev} {<span className="sar_font">$</span>}
                           </p>
                         </div>
                       </Col>
@@ -271,7 +271,7 @@ const PropertyDetails = () => {
                         <div className={styles.main_details}>
                           <span>{key("uncollectedAmount")}</span>
                           <p>
-                            {totalPendingRev} {key("sarSmall")}
+                            {totalPendingRev} {<span className="sar_font">$</span>}
                           </p>
                         </div>
                       </Col>
@@ -284,7 +284,7 @@ const PropertyDetails = () => {
                         <div className={styles.main_details}>
                           <span>{key("totalPaidCosts")}</span>
                           <p>
-                            {totalPaidEx} {key("sarSmall")}
+                            {totalPaidEx} {<span className="sar_font">$</span>}
                           </p>
                         </div>
                       </Col>
@@ -297,7 +297,7 @@ const PropertyDetails = () => {
                         <div className={styles.main_details}>
                           <span>{key("totalUnPaidCosts")}</span>
                           <p>
-                            {totalUnPaidCosts} {key("sarSmall")}
+                            {totalUnPaidCosts} {<span className="sar_font">$</span>}
                           </p>
                         </div>
                       </Col>
@@ -400,7 +400,7 @@ const PropertyDetails = () => {
                         <span>{key("nextPaymentAmount")}</span>
                         <p>
                           {currentContract?.data?.nextRevenue?.amount || 0}{" "}
-                          {key("sar")}
+                          {<span className="sar_font">$</span>}
                         </p>
                       </div>
                     </Col>

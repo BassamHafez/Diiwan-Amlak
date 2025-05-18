@@ -184,7 +184,7 @@ const Expenses = ({
         [key("estate")]:
           estateParentCompound?.name || ex?.compound?.name || key("noCompound"),
         [key("type")]: key(ex.type) || "-",
-        [`${key("amount")} (${key("sarSmall")})`]: ex?.amount || "-",
+        [`${key("amount")} (${<span className="sar_font">$</span>})`]: ex?.amount || "-",
         [key("dueDate")]: formattedDate(ex?.dueDate) || "-",
         [key("status")]:
           renamedExpensesStatusMethod(ex.status, currentLang) || "-",

@@ -59,7 +59,7 @@ const AllSubscriptions = () => {
                             {key("features")}
                           </th>
                           <th>
-                            {key("price")} ({key("sarSmall")})
+                            {key("price")} ({<span className="sar_font">$</span>})
                           </th>
                           <th>{key("actions")}</th>
                         </tr>

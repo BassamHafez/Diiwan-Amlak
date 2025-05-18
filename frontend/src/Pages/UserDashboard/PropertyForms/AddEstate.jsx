@@ -308,7 +308,7 @@ const AddEstate = ({ hideModal, refetch, compId }) => {
             <Col sm={6}>
               <div className="field mb-1">
                 <label htmlFor="price">
-                  {key("unitPrice")} ({key("sar")}) {requiredLabel}
+                  {key("unitPrice")} ({<span className="sar_font">$</span>}) {requiredLabel}
                 </label>
                 <Field type="number" id="price" name="price" />
                 <ErrorMessage name="price" component={InputErrorMessage} />

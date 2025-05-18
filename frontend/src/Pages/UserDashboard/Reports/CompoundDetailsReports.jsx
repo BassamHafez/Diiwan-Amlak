@@ -56,8 +56,8 @@ const CompoundDetailsReports = ({ compoundsOptions, filterType }) => {
       [key("region")]: compoundInfo?.region || "-",
       [key("totalProperties")]: compoundInfo?.estatesCount || "-",
       [`${key("collectionRatio")} (%)`]: collectionRatioVal || "-",
-      [`${key("theCommission")} (${key("sarSmall")})`]: theCommissionVal || "0",
-      [`${key("netIncome")} (${key("sarSmall")})`]: netIncomeVal || "-",
+      [`${key("theCommission")} (${<span className="sar_font">$</span>})`]: theCommissionVal || "0",
+      [`${key("netIncome")} (${<span className="sar_font">$</span>})`]: netIncomeVal || "-",
       [`${key("operatingRatio")} (%)`]:
         convertNumbersToFixedTwo(commissionPercentage) || "0",
       [`${key("netReturns")} (%)`]: netReturnsVal || "-",
@@ -81,8 +81,8 @@ const CompoundDetailsReports = ({ compoundsOptions, filterType }) => {
             <th>{key("region")}</th>
             <th>{key("totalProperties")}</th>
             <th>{`${key("collectionRatio")} (%)`}</th>
-            <th>{`${key("theCommission")} (${key("sarSmall")})`}</th>
-            <th>{`${key("netIncome")} (${key("sarSmall")})`}</th>
+            <th>{`${key("theCommission")} (${<span className="sar_font">$</span>})`}</th>
+            <th>{`${key("netIncome")} (${<span className="sar_font">$</span>})`}</th>
             <th>{`${key("operatingRatio")} (%)`}</th>
             <th>{`${key("netReturns")} (%)`}</th>
           </tr>

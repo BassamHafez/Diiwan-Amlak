@@ -241,7 +241,7 @@ const GeneralDetails = memo(
                         {key("unitPrice")}
                       </span>
                       <span className={styles.data}>
-                        {details.price} {key("sar")}
+                        {details.price} {<span className="sar_font">$</span>}
                       </span>
                     </li>
                   ) : (

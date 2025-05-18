@@ -97,7 +97,7 @@ const SplitRevenue = ({
         <div className="d-flex px-2">
           <span className="mb-4 text-secondary">
             <FontAwesomeIcon className="text-warning" icon={faCoins} />{" "}
-            {key("totallyAmount")} ({revenueDetails?.amount}) {key("sarSmall")}
+            {key("totallyAmount")} ({revenueDetails?.amount}) {<span className="sar_font">$</span>}
           </span>
         </div>
 
@@ -105,7 +105,7 @@ const SplitRevenue = ({
           <Col sm={6}>
             <div className="field">
               <label htmlFor="splitedAmount">
-                {key("splitedAmount")} ({key("sarSmall")}) {requiredLabel}
+                {key("splitedAmount")} ({<span className="sar_font">$</span>}) {requiredLabel}
               </label>
               <Field type="number" id="splitedAmount" name="splitedAmount" />
               <ErrorMessage

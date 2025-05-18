@@ -269,7 +269,7 @@ const CompoundDetails = () => {
                           <span>{key("theCommission")}</span>
                           <p>
                             {convertNumbersToFixedTwo(theCommissionVal)}{" "}
-                            {key("sarSmall")}
+                            {<span className="sar_font">$</span>}
                           </p>
                         </div>
                       </Col>
@@ -288,7 +288,7 @@ const CompoundDetails = () => {
                             {key("netIncome")} {key("forEstates")}
                           </span>
                           <p>
-                            {netIncomeVal} {key("sarSmall")}
+                            {netIncomeVal} {<span className="sar_font">$</span>}
                           </p>
                         </div>
                       </Col>

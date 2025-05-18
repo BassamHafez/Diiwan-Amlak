@@ -162,7 +162,7 @@ const TaskItem = ({ task, refetch, compId, propId }) => {
                   icon={faCoins}
                   className={`${isArLang ? "ms-1" : "me-1"} color-main`}
                 />{" "}
-                {task.cost} {key("sarSmall")}
+                {task.cost} {<span className="sar_font">$</span>}
               </span>
             </div>
             <div>

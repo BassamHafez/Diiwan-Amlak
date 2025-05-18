@@ -88,7 +88,7 @@ const OperationalReport = ({
         [key("theTenant")]: ex?.tenant?.name || "-",
         [key("startDate")]: formattedDate(ex?.startDate || "-"),
         [key("endDate")]: formattedDate(ex?.endDate || "-"),
-        [`${key("amount")} (${key("sarSmall")})`]: ex?.totalAmount || "-",
+        [`${key("amount")} (${<span className="sar_font">$</span>})`]: ex?.totalAmount || "-",
         [key("status")]: renamedContractStatus(ex?.status, currentLang) || "-",
       };
     });

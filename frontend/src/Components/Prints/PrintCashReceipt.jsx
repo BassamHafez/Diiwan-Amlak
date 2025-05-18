@@ -60,7 +60,7 @@ const PrintCashReceipt = ({
                 <th>
                   {isTax
                     ? key("baseAmount")
-                    : `${key("amount")} ${key("sarSmall")}`}
+                    : `${key("amount")} ${<span className="sar_font">$</span>}`}
                 </th>
                 {isTax && (
                   <>

@@ -67,7 +67,7 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
       },
       yaxis: {
         title: {
-          text: `${key("revenues")} (${key("sar")})`,
+          text: `${key("revenues")} (${<span className="sar_font">$</span>})`,
         },
       },
       legend: {
@@ -78,7 +78,7 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
       },
       tooltip: {
         y: {
-          formatter: (value) => `${value.toLocaleString()} ${key("sar")}`,
+          formatter: (value) => `${value.toLocaleString()} ${<span className="sar_font">$</span>}`,
         },
       },
       colors: ["#d39833", "#fad4a9","#33b5e5", "#f44336"],

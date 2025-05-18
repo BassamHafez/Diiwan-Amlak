@@ -124,7 +124,7 @@ const PackItem = ({ pack, type, refetch }) => {
                       {key("oldPrice")}
                     </span>
                     <span>
-                      {pack.originalPrice || 0} {key("sar")}
+                      {pack.originalPrice || 0} {<span className="sar_font">$</span>}
                     </span>
                   </li>
                   <li>
@@ -136,7 +136,7 @@ const PackItem = ({ pack, type, refetch }) => {
                       {key("newPrice")}
                     </span>
                     <span>
-                      {pack.price || 0} {key("sar")}
+                      {pack.price || 0} {<span className="sar_font">$</span>}
                     </span>
                   </li>
                 </ul>

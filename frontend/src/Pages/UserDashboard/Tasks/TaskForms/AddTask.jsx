@@ -230,7 +230,7 @@ const AddTask = ({ hideModal, refetch, propId, compId }) => {
             <Col sm={6}>
               <div className="field">
                 <label htmlFor="cost">
-                  {key("cost")} ({key("sarSmall")}) {requiredLabel}
+                  {key("cost")} ({<span className="sar_font">$</span>}) {requiredLabel}
                 </label>
                 <Field type="number" id="cost" name="cost" />
                 <ErrorMessage name="cost" component={InputErrorMessage} />

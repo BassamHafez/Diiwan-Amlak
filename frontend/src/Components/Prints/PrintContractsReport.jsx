@@ -45,7 +45,7 @@ const PrintContractsReport = ({
 
         {!isCompoundDetails && (
           <p className="my-4 fw-bold">
-            {key("totalAmount")} : {totalAmount} {key("sar")}
+            {key("totalAmount")} : {totalAmount} {<span className="sar_font">$</span>}
           </p>
         )}
       </div>
