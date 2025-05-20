@@ -137,7 +137,7 @@ const Contracts = ({ details, estateParentCompound, refetchDetails }) => {
         [key("phone")]: tenant.phone || "-",
         [key("startContract")]: formattedDate(contract?.startDate) || "-",
         [key("endContract")]: formattedDate(contract?.endDate) || "-",
-        [`${key("price")} ${key("sarSmall")}`]: contract?.totalAmount || "-",
+        [`${key("price")} ${<span className="sar_font">$</span>}`]: contract?.totalAmount || "-",
         [key("status")]:
           renamedContractStatus(contract?.status, currentLang) || "-",
         [key("agent")]: brokerName,

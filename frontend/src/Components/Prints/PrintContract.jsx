@@ -45,7 +45,7 @@ const PrintContract = ({ contract, details,estateParentCompound, id, type }) => 
             <thead className={styles.table_head}>
               <tr>
                 <th>
-                  {key("amount")} ({key("sarSmall")})
+                  {key("amount")} ({<span className="sar_font">$</span>})
                 </th>
                 <th>{key("startContract")}</th>
                 <th>{key("endContract")}</th>

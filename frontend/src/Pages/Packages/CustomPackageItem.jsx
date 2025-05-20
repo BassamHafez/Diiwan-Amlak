@@ -201,7 +201,7 @@ const CustomPackageItem = ({
           cancelBtn={key("cancel")}
         >
           <h5 style={{ lineHeight: 2 }}>
-            {` 💵 ${key("subscriptionCost")} [${subCost} ${key("sar")}] 
+            {` 💵 ${key("subscriptionCost")} [${subCost} ${<span className="sar_font">$</span>}] 
             `}{" "}
             <br /> {key("reviewPackage")}
           </h5>

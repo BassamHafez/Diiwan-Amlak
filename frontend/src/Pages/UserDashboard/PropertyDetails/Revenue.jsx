@@ -191,7 +191,7 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
         [key("estate")]: estateParentCompound?.name || key("noCompound"),
         [key("theTenant")]: tenant.name || "-",
         [key("phone")]: tenant.phone || "-",
-        [`${key("amount")} ${key("sarSmall")}`]: rev?.amount || "-",
+        [`${key("amount")} ${<span className="sar_font">$</span>}`]: rev?.amount || "-",
         [key("dueDate")]: formattedDate(rev?.dueDate) || "-",
         [key("status")]: renamedRevenuesStatus(rev?.status, currentLang) || "-",
         [key("agent")]: brokerName,

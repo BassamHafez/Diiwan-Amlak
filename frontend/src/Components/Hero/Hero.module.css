@@ -1,6 +1,7 @@
 .home_header {
   min-height: 80vh;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -34,7 +35,6 @@
 
 .header_imgs {
   position: relative;
-  width: 100%;
   min-height: 80vh;
 }
 
@@ -170,7 +170,7 @@
   }
   .caption h1 {
     font-size: 50px;
-  } 
+  }
 }
 @media screen and (max-width: 527px) {
   .header1_img {
@@ -181,7 +181,7 @@
   }
   .caption h1 {
     font-size: 40px;
-  } 
+  }
 }
 @media screen and (max-width: 490px) {
   .img1_position {
@@ -209,7 +209,7 @@
   }
   .caption h1 {
     font-size: 30px;
-  } 
+  }
   .caption h1 span {
     font-size: 20px;
   }
@@ -248,5 +248,4 @@
   .caption p {
     font-size: 0.875rem;
   }
-
 }

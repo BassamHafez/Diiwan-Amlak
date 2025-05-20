@@ -85,7 +85,7 @@ const CompoundContracts = ({ compoundEstates }) => {
             [key("theTenant")]: findTenant(contract.tenant)?.name || "-",
             [key("startContract")]: formattedDate(contract?.startDate) || "-",
             [key("endContract")]: formattedDate(contract?.endDate) || "-",
-            [`${key("price")} ${key("sarSmall")}`]:
+            [`${key("price")} ${<span className="sar_font">$</span>}`]:
               contract?.totalAmount || "-",
             [key("status")]:
               renamedContractStatus(contract?.status, currentLang) || "-",

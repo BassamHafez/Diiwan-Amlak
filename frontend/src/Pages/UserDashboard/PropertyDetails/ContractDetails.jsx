@@ -44,7 +44,7 @@ const ContractDetails = ({ contract, type, findTenant }) => {
             <span>{key("amount")}</span>
           </span>
           <span>
-            {contractData?.totalAmount} {key("sar")}
+            {contractData?.totalAmount} {<span className="sar_font">$</span>}
           </span>
         </li>
         <li>

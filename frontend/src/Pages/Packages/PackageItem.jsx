@@ -133,7 +133,7 @@ const PackageItem = ({ pack, type }) => {
             {type !== "vip" ? (
               <>
                 <span className={styles.price_number}>
-                  {pack.price} {key("sarSmall")}
+                  {pack.price} {<span className="sar_font">$</span>}
                 </span>
                 <div className={styles.del_price}>
                   <span>
@@ -229,7 +229,9 @@ const PackageItem = ({ pack, type }) => {
           <div>
             <img className={styles.logo} src={logo} alt="logo" />
             <h5 style={{ lineHeight: 2 }}>
-              {`${key("subscriptionCost")} [${subCost} ${key("sar")}] 
+              {`${key("subscriptionCost")} [${subCost} ${(
+                <span className="sar_font">$</span>
+              )}] 
             `}{" "}
             </h5>
             <p className="text-secondary"> {key("reviewPackage")}</p>

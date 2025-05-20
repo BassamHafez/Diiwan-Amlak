@@ -29,6 +29,10 @@ const useValidation = () => {
     () =>
       string()
         .email(`${key("emailValidation1")}`)
+        .matches(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+          key("emailValidation1")
+        )
         .required(`${key("emailValidation2")}`),
     [key]
   );

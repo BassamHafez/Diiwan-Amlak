@@ -31,7 +31,7 @@ const ExpensesDetails = ({ exDetails }) => {
             <span>{key("amount")}</span>
           </span>
           <span>
-            {exDetails.amount} {key("sar")}
+            {exDetails.amount} {<span className="sar_font">$</span>}
           </span>
         </li>
         <li>

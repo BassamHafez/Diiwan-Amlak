@@ -243,7 +243,7 @@ const UpdateContract = ({ contract, hideModal, refetch, refetchDetails }) => {
                 <div className="field">
                   <label htmlFor="totalAmount">
                     {key("price")}
-                    {requiredLabel} ({key("sar")})
+                    {requiredLabel} ({<span className="sar_font">$</span>})
                   </label>
                   <Field type="number" id="totalAmount" name="totalAmount" />
                   <ErrorMessage

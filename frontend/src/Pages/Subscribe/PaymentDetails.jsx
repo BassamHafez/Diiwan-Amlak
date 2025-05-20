@@ -38,7 +38,7 @@ const PaymentDetails = ({ data }) => {
             <tr>
               <th>{key("amount")}</th>
               <td>
-                {data?.amount} {key("sar")}
+                {data?.amount} {<span className="sar_font">$</span>}
               </td>
             </tr>
             <tr>

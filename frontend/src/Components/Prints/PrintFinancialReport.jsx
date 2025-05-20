@@ -141,10 +141,10 @@ const PrintFinancialReport = ({
             <tbody className={styles.table_body}>
               <tr>
                 <td>
-                  {totalRevAmount} {key("sarSmall")}
+                  {totalRevAmount} {<span className="sar_font">$</span>}
                 </td>
                 <td>
-                  {totalExAmount} {key("sarSmall")}
+                  {totalExAmount} {<span className="sar_font">$</span>}
                 </td>
               </tr>
             </tbody>

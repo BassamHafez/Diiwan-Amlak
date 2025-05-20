@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@font-face {
+  font-family: "Arshid";
+  src: url("./fonts/Arshid.otf") format("truetype");
+}
 :root {
   --main_color: #d39833;
   --main_color_light: #f4e3cf;
@@ -54,10 +58,7 @@ p {
   overflow-wrap: break-word;
 }
 .hidden_img {
-  visibility: hidden;
-  position: absolute;
-  width: 0;
-  height: 0;
+  display: none;
 }
 /* bootstrap */
 .dropdown-toggle::after {
@@ -119,7 +120,9 @@ p {
 .bg-navy {
   background-color: var(--deep_navy) !important;
 }
-
+.sar_font {
+  font-family: Arshid !important;
+}
 .over {
   overflow: hidden !important;
 }
@@ -378,8 +381,6 @@ p {
   transform: scaleX(1);
   transition: all 0.3s ease;
 }
-
-
 
 @keyframes check-15 {
   50% {

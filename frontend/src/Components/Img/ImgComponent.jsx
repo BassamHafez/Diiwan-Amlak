@@ -8,14 +8,8 @@ const ImgComponent = ({ src, alt, width, height, hash, lazyLoad, preload }) => {
     const img = new Image();
     img.onload = () => setIsImageLoaded(true);
     img.src = src;
-
-    if (preload) {
-      document.head.insertAdjacentHTML(
-        "beforeend",
-        `<link rel="preload" as="image" href="${src}" />`
-      );
-    }
   }, [src, preload]);
+
   return (
     <>
       <div

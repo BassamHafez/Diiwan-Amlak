@@ -237,7 +237,7 @@ const AdminHome = () => {
 
                 <div className={styles.box_caption}>
                   <span>
-                    {key(item.label)} ({key("sarSmall")})
+                    {key(item.label)} ({<span className="sar_font">$</span>})
                   </span>
 
                   <p>
@@ -272,7 +272,7 @@ const AdminHome = () => {
                             {key("accName")}
                           </th>
                           <th>
-                            {key("amount")} ({key("sarSmall")})
+                            {key("amount")} ({<span className="sar_font">$</span>})
                           </th>
                         </tr>
                       </thead>

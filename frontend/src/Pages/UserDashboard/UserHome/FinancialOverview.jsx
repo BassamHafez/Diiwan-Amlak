@@ -74,7 +74,7 @@ const FinancialOverview = ({ myData, totalExpenses, totalRevenues }) => {
 
                 <p style={{ wordBreak: "break-all" }}>
                   {convertNumbersToFixedTwo(item.value)}{" "}
-                  {item.isMoney ? key("sarSmall") : ""}
+                  {item.isMoney ? <span className="sar_font">$</span> : ""}
                 </p>
               </div>
             </div>

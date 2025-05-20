@@ -133,7 +133,7 @@ const AddExpenses = ({ hideModal, refetch, isCompound, refetchDetails }) => {
             <Col sm={6}>
               <div className="field">
                 <label htmlFor="amount">
-                  {key("amount")} ({key("sarSmall")}) {requiredLabel}
+                  {key("amount")} ({<span className="sar_font">$</span>}) {requiredLabel}
                 </label>
                 <Field type="number" id="amount" name="amount" />
                 <ErrorMessage name="amount" component={InputErrorMessage} />
