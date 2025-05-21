@@ -24,10 +24,6 @@ const declined = process.env.TELR_DECLINED_URL;
 const cancelled = process.env.TELR_CANCELLED_URL;
 const test = process.env.NODE_ENV !== "production" ? "1" : "0";
 
-console.log("store :", store);
-console.log("authkey :", authkey);
-console.log("authorised :", authorised);
-
 const memberPopOptions = {
   path: "members.user",
   select: "name email phone photo",
