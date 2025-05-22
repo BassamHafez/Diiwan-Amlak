@@ -494,6 +494,8 @@ exports.subscribeInPackage = catchAsync(async (req, res, next) => {
     return next(new ApiError("Error getting payment link", 500));
   }
 
+  console.log("telr data :", data);
+
   const { order } = data;
   const { ref, url } = order;
 
