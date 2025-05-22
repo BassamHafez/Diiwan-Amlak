@@ -61,7 +61,11 @@ const contractSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+contractSchema.index({ account: 1 });
 contractSchema.index({ status: 1 });
+contractSchema.index({ estate: 1 });
+contractSchema.index({ compound: 1 });
+contractSchema.index({ startDate: 1, endDate: 1 });
 
 const Contract = mongoose.model("Contract", contractSchema);
 

@@ -78,6 +78,8 @@ const estateSchema = new mongoose.Schema(
 );
 
 estateSchema.index({ account: 1 });
+estateSchema.index({ status: 1 });
+estateSchema.index({ compound: 1 });
 
 const Estate = mongoose.model("Estate", estateSchema);
 

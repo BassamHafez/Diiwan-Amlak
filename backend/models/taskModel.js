@@ -50,6 +50,8 @@ const taskSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+taskSchema.index({ account: 1, date: 1, isCompleted: 1 });
+
 const Task = mongoose.model("Task", taskSchema);
 
 module.exports = Task;

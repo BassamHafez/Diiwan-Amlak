@@ -64,6 +64,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.index({ account: 1 });
+
 userSchema.pre("save", async function (next) {
   // Only run if pass was modified
   if (!this.isModified("password")) return next();
