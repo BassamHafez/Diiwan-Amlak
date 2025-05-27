@@ -66,6 +66,10 @@ const revenueSchema = new mongoose.Schema(
 );
 
 revenueSchema.index({ account: 1, dueDate: 1 });
+revenueSchema.index({ compound: 1 });
+revenueSchema.index({ estate: 1 });
+revenueSchema.index({ status: 1 });
+revenueSchema.index({ contract: 1 });
 
 const Revenue = mongoose.model("Revenue", revenueSchema);
 

@@ -107,6 +107,8 @@ const accountSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+accountSchema.index({ owner: 1 });
+
 const Account = mongoose.model("Account", accountSchema);
 
 module.exports = Account;

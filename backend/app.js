@@ -10,6 +10,7 @@ const compression = require("compression");
 const cors = require("cors");
 
 const ApiError = require("./utils/ApiError");
+const logger = require("./utils/logger");
 const startCronJobs = require("./cronJobs");
 const ensureDirectories = require("./utils/createStaticFiles");
 const globalErrorHandler = require("./controllers/errorController");
@@ -40,7 +41,7 @@ app.use(express.static(path.join(__dirname, "uploads")));
 
 // development logging
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+  app.use(morgan("combined", { stream: logger.stream }));
 }
 
 // limit requests from same IP
@@ -63,7 +64,6 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Prevent parameter pollution
-// app.use(hpp());
 app.use(
   hpp({
     whitelist: ["price"],
@@ -73,11 +73,21 @@ app.use(
 // Compress texts (requests) before sent to client
 app.use(compression());
 
+// Log all requests
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.originalUrl}`, {
+    ip: req.ip,
+    userAgent: req.get('user-agent'),
+  });
+  next();
+});
+
 // ROUTES
 app.post("/api/v1/telr-webhook", telrWebhook);
 mountRoutes(app);
 
 app.all("*", (req, res, next) => {
+  logger.warn(`Route not found: ${req.originalUrl}`);
   next(new ApiError(`Can't find ${req.originalUrl} on server!`, 404));
 });
 

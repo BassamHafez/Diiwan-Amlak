@@ -40,6 +40,8 @@ const purchaseSchema = new mongoose.Schema({
   billInfo: Object,
 });
 
+purchaseSchema.index({ account: 1 });
+
 const Purchase = mongoose.model("Purchase", purchaseSchema);
 
 module.exports = Purchase;

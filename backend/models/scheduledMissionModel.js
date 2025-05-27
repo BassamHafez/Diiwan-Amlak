@@ -38,6 +38,8 @@ const scheduledMissionSchema = new mongoose.Schema(
 );
 
 scheduledMissionSchema.index({ isDone: 1, scheduledAt: 1 });
+scheduledMissionSchema.index({ account: 1 });
+scheduledMissionSchema.index({ type: 1 });
 
 const ScheduledMission = mongoose.model(
   "ScheduledMission",

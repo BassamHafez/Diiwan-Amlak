@@ -1,4 +1,5 @@
 const ApiError = require("../utils/ApiError");
+const logger = require("../utils/logger");
 
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
@@ -64,6 +65,20 @@ const sendErrorProd = (err, req, res) => {
 };
 
 module.exports = (err, req, res, next) => {
+  // Log the incoming error
+  logger.error("Error caught by global error handler:", {
+    env: process.env.NODE_ENV,
+    name: err?.name,
+    message: err?.message,
+    path: req.originalUrl,
+    method: req.method,
+    body: req.body,
+    query: req.query,
+    params: req.params,
+    statusCode: err.statusCode || 500,
+    stack: err.stack,
+  });
+
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 

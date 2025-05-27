@@ -55,6 +55,10 @@ const expenseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Expense = mongoose.model("Expense", expenseSchema);
+expenseSchema.index({ account: 1 });
+expenseSchema.index({ status: 1 });
+expenseSchema.index({ estate: 1 });
+expenseSchema.index({ compound: 1 });
 
+const Expense = mongoose.model("Expense", expenseSchema);
 module.exports = Expense;
