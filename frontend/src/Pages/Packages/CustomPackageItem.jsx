@@ -7,7 +7,7 @@ import {
   faCircleChevronRight,
   faYinYang,
 } from "@fortawesome/free-solid-svg-icons";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import MainModal from "../../Components/UI/Modals/MainModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ import { mainFormsHandlerTypeRaw } from "../../util/Http";
 import { toast } from "react-toastify";
 import CheckPermissions from "../../Components/CheckPermissions/CheckPermissions";
 import fire from "../../assets/svg/fire.svg";
-import { crown, vip } from "../../shared/images";
+import { crown, logo, vip } from "../../shared/images";
 
 const CustomPackageItem = ({
   features,
@@ -200,11 +200,15 @@ const CustomPackageItem = ({
           okBtn={key("continue")}
           cancelBtn={key("cancel")}
         >
-          <h5 style={{ lineHeight: 2 }}>
-            {` 💵 ${key("subscriptionCost")} [${subCost} ${<span className="sar_font">$</span>}] 
-            `}{" "}
-            <br /> {key("reviewPackage")}
-          </h5>
+          <div>
+            <img className={styles.logo} src={logo} alt="logo" />
+            <h5 style={{ lineHeight: 2 }}>
+              {`${key("subscriptionCost")} ${subCost} 
+            `}
+              <span className="sar_font">$</span>{" "}
+            </h5>
+            <p className="text-secondary"> {key("reviewPackage")}</p>
+          </div>
         </MainModal>
       )}
     </div>

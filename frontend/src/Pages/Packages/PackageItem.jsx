@@ -229,10 +229,9 @@ const PackageItem = ({ pack, type }) => {
           <div>
             <img className={styles.logo} src={logo} alt="logo" />
             <h5 style={{ lineHeight: 2 }}>
-              {`${key("subscriptionCost")} [${subCost} ${(
-                <span className="sar_font">$</span>
-              )}] 
-            `}{" "}
+              {`${key("subscriptionCost")} ${subCost} 
+            `}
+              <span className="sar_font">$</span>{" "}
             </h5>
             <p className="text-secondary"> {key("reviewPackage")}</p>
           </div>
