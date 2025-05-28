@@ -16,15 +16,7 @@ const sendEmail = require("../utils/sendEmail");
 const { newMemberHtml } = require("../utils/htmlMessages");
 const { formatSaudiNumber } = require("../utils/formatNumbers");
 const { getSubscriptionPrice } = require("../utils/subscribeHelpers");
-
-const store = process.env.TELR_STORE_ID;
-const authkey = process.env.TELR_AUTH_KEY;
-const authorised = process.env.TELR_AUTHORISED_URL;
-const declined = process.env.TELR_DECLINED_URL;
-const cancelled = process.env.TELR_CANCELLED_URL;
-const test = process.env.NODE_ENV !== "production" ? "1" : "0";
-
-console.log("teler test:", test);
+const { createPaymentOrder } = require("../utils/paymentGateway");
 
 const memberPopOptions = {
   path: "members.user",
@@ -327,42 +319,11 @@ exports.subscribe = catchAsync(async (req, res, next) => {
 
   const purchaseId = new mongoose.Types.ObjectId();
 
-  const options = {
-    method: "POST",
-    url: "https://secure.telr.com/gateway/order.json",
-    headers: { accept: "application/json", "Content-Type": "application/json" },
-    data: {
-      method: "create",
-      store,
-      authkey,
-      framed: 0,
-      order: {
-        cartid: purchaseId.toString(),
-        test,
-        amount: cost,
-        currency: "SAR",
-        description: "custom subscription",
-      },
-      return: {
-        authorised,
-        declined,
-        cancelled,
-      },
-    },
-  };
-
-  const { data } = await axios.request(options);
-
-  if (!data || data.error || !data.order) {
-    return next(new ApiError("Error getting payment link", 500));
-  }
-
-  const { order } = data;
-  const { ref, url } = order;
-
-  if (!ref || !url) {
-    return next(new ApiError("Error getting payment link", 500));
-  }
+  const { ref, url } = await createPaymentOrder(
+    purchaseId.toString(),
+    cost,
+    "custom subscription"
+  );
 
   await Purchase.create({
     _id: purchaseId,
@@ -466,44 +427,11 @@ exports.subscribeInPackage = catchAsync(async (req, res, next) => {
 
   const purchaseId = new mongoose.Types.ObjectId();
 
-  const options = {
-    method: "POST",
-    url: "https://secure.telr.com/gateway/order.json",
-    headers: { accept: "application/json", "Content-Type": "application/json" },
-    data: {
-      method: "create",
-      store,
-      authkey,
-      framed: 0,
-      order: {
-        cartid: purchaseId.toString(),
-        test,
-        amount: package.price,
-        currency: "SAR",
-        description: "package subscription",
-      },
-      return: {
-        authorised,
-        declined,
-        cancelled,
-      },
-    },
-  };
-
-  const { data } = await axios.request(options);
-
-  console.log("telr data :", data);
-
-  if (!data || data.error || !data.order) {
-    return next(new ApiError("Error getting payment link", 500));
-  }
-
-  const { order } = data;
-  const { ref, url } = order;
-
-  if (!ref || !url) {
-    return next(new ApiError("Error getting payment link", 500));
-  }
+  const { ref, url } = await createPaymentOrder(
+    purchaseId.toString(),
+    package.price,
+    "package subscription"
+  );
 
   const expireDate = new Date(
     Date.now() + package.duration * 30.25 * 24 * 60 * 60 * 1000 // 30 days + 6 hours
