@@ -15,6 +15,10 @@ const ensureDirectories = require("./utils/createStaticFiles");
 const globalErrorHandler = require("./controllers/errorController");
 const { telrWebhook } = require("./controllers/accountController");
 const mountRoutes = require("./routes");
+const validateEnv = require("./config/environment");
+
+// Validate environment variables before starting the app
+validateEnv();
 
 const app = express();
 
