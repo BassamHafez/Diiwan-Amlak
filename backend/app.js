@@ -65,24 +65,20 @@ app.use(
 // Compress texts (requests) before sent to client
 app.use(compression());
 
-// Log all requests
-app.use((req, res, next) => {
-  logger.info(`${req.method} ${req.originalUrl}`, {
-    ip: req.ip,
-    userAgent: req.get('user-agent'),
-  });
-  next();
-});
+// Health check endpoint (should be before rate limiting)
+app.use("/health", require("./routes/healthRoutes"));
 
 // ROUTES
 app.post("/api/v1/telr-webhook", telrWebhook);
 mountRoutes(app);
 
+// Handle 404 routes
 app.all("*", (req, res, next) => {
   logger.warn(`Route not found: ${req.originalUrl}`);
   next(new ApiError(`Can't find ${req.originalUrl} on server!`, 404));
 });
 
+// Global error handler
 app.use(globalErrorHandler);
 
 module.exports = app;
