@@ -1,6 +1,5 @@
 const path = require("path");
 const express = require("express");
-const morgan = require("morgan");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
@@ -16,6 +15,7 @@ const globalErrorHandler = require("./controllers/errorController");
 const { telrWebhook } = require("./controllers/accountController");
 const mountRoutes = require("./routes");
 const validateEnv = require("./config/environment");
+const requestLogger = require("./middleware/requestLogger");
 
 // Validate environment variables before starting the app
 validateEnv();
@@ -42,10 +42,8 @@ app.use((req, res, next) => {
 // Serve static files
 app.use(express.static(path.join(__dirname, "uploads")));
 
-// development logging
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("combined", { stream: logger.stream }));
-}
+// Apply logging middleware
+requestLogger(app);
 
 // Body parser
 app.use(express.json({ limit: "10mb" }));
