@@ -12,11 +12,12 @@ const test = process.env.NODE_ENV !== "production" ? "1" : "0";
  * Creates a payment order with Telr payment gateway
  * @param {string} cartId - The unique cart ID for the order
  * @param {number} amount - The order amount
+ * @param {object} account - The account that requested the order
  * @param {string} description - The order description
  * @returns {Promise<{ref: string, url: string}>} - Payment reference and URL
  * @throws {ApiError} If payment gateway request fails
  */
-exports.createPaymentOrder = async (cartId, amount, description) => {
+exports.createPaymentOrder = async (cartId, amount, account, description) => {
   const options = {
     method: "POST",
     url: "https://secure.telr.com/gateway/order.json",
@@ -37,6 +38,21 @@ exports.createPaymentOrder = async (cartId, amount, description) => {
         authorised,
         declined,
         cancelled,
+      },
+      customer: {
+        ref: account.owner._id,
+        email: account.owner.email,
+        name: {
+          ...(account.name && { title: `owner of ${account.name}` }),
+          forenames: account.owner.name,
+        },
+        address: {
+          ...(account.address && { line1: account.address }),
+          ...(account.city && { city: account.city }),
+          ...(account.region && { state: account.region }),
+          country: "Saudi Arabia",
+        },
+        phone: account.owner.phone,
       },
     },
   };

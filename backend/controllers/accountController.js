@@ -322,6 +322,7 @@ exports.subscribe = catchAsync(async (req, res, next) => {
   const { ref, url } = await createPaymentOrder(
     purchaseId.toString(),
     cost,
+    account,
     "custom subscription"
   );
 
@@ -430,6 +431,7 @@ exports.subscribeInPackage = catchAsync(async (req, res, next) => {
   const { ref, url } = await createPaymentOrder(
     purchaseId.toString(),
     package.price,
+    account,
     "package subscription"
   );
 
