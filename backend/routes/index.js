@@ -22,30 +22,45 @@ const testimonialRoutes = require("../routes/testimonialRoutes");
 const supportRoutes = require("../routes/supportRoutes");
 const termRoutes = require("../routes/termRoutes");
 
+const { apiGeneralLimiter, authLimiter } = require("../middleware/rateLimiter");
+
 const mountRoutes = (app) => {
-  app.use("/api/v1/auth", authRoutes);
-  app.use("/api/v1/subscriptions", subscriptionRoutes);
-  app.use("/api/v1/packages", packageRoutes);
-  app.use("/api/v1/accounts", accountRoutes);
-  app.use("/api/v1/users", userRoutes);
-  app.use("/api/v1/compounds", compoundRoutes);
-  app.use("/api/v1/estates", estateRoutes);
-  app.use("/api/v1/estates/:estateId/contracts", contractRoutes);
-  app.use("/api/v1/estates/:estateId/revenues", revenueRoutes);
-  app.use("/api/v1/contacts", contactRoutes);
-  app.use("/api/v1/contacts/brokers", brokerContactRoutes);
-  app.use("/api/v1/contacts/landlords", landlordContactRoutes);
-  app.use("/api/v1/contacts/services", serviceContactRoutes);
-  app.use("/api/v1/contacts/tenants", tenantContactRoutes);
-  app.use("/api/v1/tags", tagRoutes);
-  app.use("/api/v1/expenses", expenseRoutes);
-  app.use("/api/v1/tasks", taskRoutes);
-  app.use("/api/v1/reports", reportRoutes);
-  app.use("/api/v1/stats", statsRoutes);
-  app.use("/api/v1/configs", configRoutes);
-  app.use("/api/v1/testimonials", testimonialRoutes);
-  app.use("/api/v1/support", supportRoutes);
-  app.use("/api/v1/terms", termRoutes);
+  app.use("/api/v1/auth", authLimiter, authRoutes);
+
+  app.use("/api/v1/subscriptions", apiGeneralLimiter, subscriptionRoutes);
+  app.use("/api/v1/packages", apiGeneralLimiter, packageRoutes);
+  app.use("/api/v1/accounts", apiGeneralLimiter, accountRoutes);
+  app.use("/api/v1/users", apiGeneralLimiter, userRoutes);
+  app.use("/api/v1/compounds", apiGeneralLimiter, compoundRoutes);
+  app.use("/api/v1/estates", apiGeneralLimiter, estateRoutes);
+  app.use(
+    "/api/v1/estates/:estateId/contracts",
+    apiGeneralLimiter,
+    contractRoutes
+  );
+  app.use("/api/v1/contacts", apiGeneralLimiter, contactRoutes);
+  app.use("/api/v1/contacts/brokers", apiGeneralLimiter, brokerContactRoutes);
+  app.use(
+    "/api/v1/contacts/landlords",
+    apiGeneralLimiter,
+    landlordContactRoutes
+  );
+  app.use("/api/v1/contacts/services", apiGeneralLimiter, serviceContactRoutes);
+  app.use("/api/v1/contacts/tenants", apiGeneralLimiter, tenantContactRoutes);
+  app.use(
+    "/api/v1/estates/:estateId/revenues",
+    apiGeneralLimiter,
+    revenueRoutes
+  );
+  app.use("/api/v1/expenses", apiGeneralLimiter, expenseRoutes);
+  app.use("/api/v1/reports", apiGeneralLimiter, reportRoutes);
+  app.use("/api/v1/stats", apiGeneralLimiter, statsRoutes);
+  app.use("/api/v1/tags", apiGeneralLimiter, tagRoutes);
+  app.use("/api/v1/tasks", apiGeneralLimiter, taskRoutes);
+  app.use("/api/v1/configs", apiGeneralLimiter, configRoutes);
+  app.use("/api/v1/testimonials", apiGeneralLimiter, testimonialRoutes);
+  app.use("/api/v1/support", apiGeneralLimiter, supportRoutes);
+  app.use("/api/v1/terms", apiGeneralLimiter, termRoutes);
 };
 
 module.exports = mountRoutes;
