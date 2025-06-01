@@ -1,6 +1,21 @@
-import { convertTpOptionsFormate } from "../Components/Logic/LogicFun";
 import { useQuery, useMemo, useSelector } from "../shared/hooks";
 import { mainFormsHandlerTypeRaw } from "../util/Http";
+
+export const convertTpOptionsFormate = (arr) => {
+  let arrOptions = [];
+  if (arr?.length > 0) {
+    arrOptions = arr.map((val) => ({
+      label: val.name,
+      value: val._id,
+      nationalId: val.nationalId,
+      phoneNumber: val.phone,
+      phoneNumber2: val.phone2,
+    }));
+  }
+  return arrOptions;
+};
+
+
 
 const useTenantsOptions = () => {
   const token = useSelector((state) => state.userInfo.token);

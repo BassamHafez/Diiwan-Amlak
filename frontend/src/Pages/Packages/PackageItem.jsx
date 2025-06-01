@@ -1,6 +1,6 @@
 import styles from "./Packages.module.css";
 import { mainFormsHandlerTypeRaw } from "../../util/Http";
-import { triangle, shape, crown, vip, logo } from "../../shared/images";
+import { triangle, shape, crown, vip, logoShape } from "../../shared/images";
 import { toast, faCircleCheck, faYinYang } from "../../shared/constants";
 import { MainModal, ButtonThree, ModalForm } from "../../shared/components";
 import {
@@ -227,7 +227,7 @@ const PackageItem = ({ pack, type }) => {
           cancelBtn={key("cancel")}
         >
           <div>
-            <img className={styles.logo} src={logo} alt="logo" />
+            <img className={styles.logo} src={logoShape} alt="logo" />
             <h5 style={{ lineHeight: 2 }}>
               {`${key("subscriptionCost")} ${subCost} 
             `}
