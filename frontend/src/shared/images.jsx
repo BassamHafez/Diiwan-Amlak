@@ -1,5 +1,6 @@
 //brand
 import logo from "../assets/logo/logo.png";
+import logoShape from "../assets/logo/logoShape.png";
 import whiteLogo from "../assets/logo/whiteLogo.png";
 import logoWithCaption from "../assets/logo/logoWithCaption.png"
 import avatar from "../assets/default.webp";
@@ -57,6 +58,7 @@ import fire from "../assets/svg/fire.svg";
 
 export {
   logo,
+  logoShape,
   whiteLogo,
   avatar,
   noAvatar,

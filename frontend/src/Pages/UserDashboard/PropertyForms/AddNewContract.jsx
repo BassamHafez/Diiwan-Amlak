@@ -231,9 +231,23 @@ const AddNewContract = ({ hideModal, refetch, refetchDetails }) => {
                     options={tenantsOptions}
                     onChange={(val) => setFieldValue("tenant", val.value)}
                     className={`${isArLang ? "text-end" : "text-start"}`}
-                    isRtl={isArLang ? true : false}
+                    isRtl={isArLang}
                     placeholder={isArLang ? "" : "select"}
+                    filterOption={(option, inputValue) => {
+                      const { label, data } = option;
+                      const input = inputValue.toLowerCase();
+                      return (
+                        label.toLowerCase().includes(input) ||
+                        (data.nationalId &&
+                          data.nationalId.toLowerCase().includes(input)) ||
+                        (data.phoneNumber &&
+                          data.phoneNumber.toLowerCase().includes(input)) ||
+                        (data.phoneNumber2 &&
+                          data.phoneNumber2.toLowerCase().includes(input))
+                      );
+                    }}
                   />
+
                   <ErrorMessage name="tenant" component={InputErrorMessage} />
                 </div>
               </Col>
@@ -346,7 +360,10 @@ const AddNewContract = ({ hideModal, refetch, refetchDetails }) => {
                 {key("cancel")}
               </button>
 
-              <button className="submit_btn bg-main my-2" type={isPending ? "button" : "submit"}>
+              <button
+                className="submit_btn bg-main my-2"
+                type={isPending ? "button" : "submit"}
+              >
                 {isPending ? (
                   <FontAwesomeIcon className="fa-spin" icon={faSpinner} />
                 ) : (

@@ -15,7 +15,7 @@ import { mainFormsHandlerTypeRaw } from "../../util/Http";
 import { toast } from "react-toastify";
 import CheckPermissions from "../../Components/CheckPermissions/CheckPermissions";
 import fire from "../../assets/svg/fire.svg";
-import { crown, logo, vip } from "../../shared/images";
+import { crown, logoShape, vip } from "../../shared/images";
 
 const CustomPackageItem = ({
   features,
@@ -201,7 +201,7 @@ const CustomPackageItem = ({
           cancelBtn={key("cancel")}
         >
           <div>
-            <img className={styles.logo} src={logo} alt="logo" />
+            <img className={styles.logo} src={logoShape} alt="logo" />
             <h5 style={{ lineHeight: 2 }}>
               {`${key("subscriptionCost")} ${subCost} 
             `}
