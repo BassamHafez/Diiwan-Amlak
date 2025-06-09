@@ -70,13 +70,12 @@ const UpdateTask = ({ hideModal, refetch, task, propId, compId }) => {
       : taskTypeOptions["en"]?.find(
           (taskOption) => taskOption.value === task.type?.trim()
         ) || "",
-    cost: task.cost || "",
+    cost: Number(task.cost) || 0,
     priority: isArLang
       ? prioritysOptions["ar"]?.find((pri) => pri.value === task.priority)
       : prioritysOptions["en"]?.find((pri) => pri.value === task.priority) ||
         "",
   };
-
 
   const onSubmit = (values, { resetForm }) => {
     const updatedValues = {
@@ -224,7 +223,8 @@ const UpdateTask = ({ hideModal, refetch, task, propId, compId }) => {
             <Col sm={6}>
               <div className="field">
                 <label htmlFor="cost">
-                  {key("cost")} ({<span className="sar_font">$</span>}) {requiredLabel}
+                  {key("cost")} ({<span className="sar_font">$</span>}){" "}
+                  {requiredLabel}
                 </label>
                 <Field type="number" id="cost" name="cost" />
                 <ErrorMessage name="cost" component={InputErrorMessage} />
@@ -307,7 +307,10 @@ const UpdateTask = ({ hideModal, refetch, task, propId, compId }) => {
                 {key("cancel")}
               </button>
 
-              <button className="submit_btn my-2" type={isPending ? "button" : "submit"}>
+              <button
+                className="submit_btn my-2"
+                type={isPending ? "button" : "submit"}
+              >
                 {isPending ? (
                   <FontAwesomeIcon className="fa-spin" icon={faSpinner} />
                 ) : (
