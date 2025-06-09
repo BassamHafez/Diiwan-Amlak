@@ -1,6 +1,5 @@
 const path = require("path");
 const express = require("express");
-const morgan = require("morgan");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
@@ -15,6 +14,11 @@ const ensureDirectories = require("./utils/createStaticFiles");
 const globalErrorHandler = require("./controllers/errorController");
 const { telrWebhook } = require("./controllers/accountController");
 const mountRoutes = require("./routes");
+const validateEnv = require("./config/environment");
+const requestLogger = require("./middleware/requestLogger");
+
+// Validate environment variables before starting the app
+validateEnv();
 
 const app = express();
 
@@ -38,10 +42,8 @@ app.use((req, res, next) => {
 // Serve static files
 app.use(express.static(path.join(__dirname, "uploads")));
 
-// development logging
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("combined", { stream: logger.stream }));
-}
+// Apply logging middleware
+requestLogger(app);
 
 // Body parser
 app.use(express.json({ limit: "10mb" }));
@@ -63,24 +65,20 @@ app.use(
 // Compress texts (requests) before sent to client
 app.use(compression());
 
-// Log all requests
-app.use((req, res, next) => {
-  logger.info(`${req.method} ${req.originalUrl}`, {
-    ip: req.ip,
-    userAgent: req.get('user-agent'),
-  });
-  next();
-});
+// Health check endpoint (should be before rate limiting)
+app.use("/health", require("./routes/healthRoutes"));
 
 // ROUTES
 app.post("/api/v1/telr-webhook", telrWebhook);
 mountRoutes(app);
 
+// Handle 404 routes
 app.all("*", (req, res, next) => {
   logger.warn(`Route not found: ${req.originalUrl}`);
   next(new ApiError(`Can't find ${req.originalUrl} on server!`, 404));
 });
 
+// Global error handler
 app.use(globalErrorHandler);
 
 module.exports = app;
