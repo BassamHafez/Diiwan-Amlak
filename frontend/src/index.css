@@ -120,9 +120,6 @@ p {
 .bg-navy {
   background-color: var(--deep_navy) !important;
 }
-.sar_font {
-  font-family: Arshid !important;
-}
 .over {
   overflow: hidden !important;
 }
@@ -252,9 +249,6 @@ p {
   position: absolute;
   top: 50%;
   right: 1.25rem;
-}
-.ar_lang * {
-  font-family: "Cairo" !important;
 }
 
 /* admin */
@@ -387,6 +381,17 @@ p {
     transform: scale(1.2);
   }
 }
+
+.ar_lang * {
+  font-family: "Cairo" !important;
+}
+.ar_lang .apexcharts-tooltip{
+    font-family: "Arshid", sans-serif !important;
+}
+.sar_font {
+  font-family: Arshid !important;
+}
+
 
 @media screen and (max-width: 1150px) {
   .scrollableTable {

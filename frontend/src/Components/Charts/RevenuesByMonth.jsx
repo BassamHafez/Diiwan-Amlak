@@ -67,7 +67,7 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
       },
       yaxis: {
         title: {
-          text: `${key("revenues")} (${<span className="sar_font">$</span>})`,
+          text: `${key("revenues")}`,
         },
       },
       legend: {
@@ -78,45 +78,43 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
       },
       tooltip: {
         y: {
-          formatter: (value) => `${value.toLocaleString()} ${<span className="sar_font">$</span>}`,
+          formatter: (value) => `${value.toLocaleString()}`,
         },
       },
-      colors: ["#d39833", "#fad4a9","#33b5e5", "#f44336"],
+      colors: ["#d39833", "#fad4a9", "#33b5e5", "#f44336"],
       dataLabels: {
         enabled: true,
         enabledOnSeries: [0],
         formatter: function (val) {
-            return val
+          return val;
         },
-        textAnchor: 'middle',
+        textAnchor: "middle",
         distributed: false,
         offsetX: 0,
         offsetY: 0,
         style: {
-            fontSize: '10px',
-            fontWeight: 'bold',
-            colors: undefined
+          fontSize: "10px",
+          fontWeight: "bold",
+          colors: undefined,
         },
         background: {
           enabled: true,
-          foreColor: '#fff',
+          foreColor: "#fff",
           padding: 2,
           opacity: 0.9,
-
         },
-      }
+      },
     },
- 
+
     series: [
       {
         name: key("totalPaidRevenues"),
-        data: totalPaid,    
+        data: totalPaid,
       },
       {
         name: key("pendingRevenues"),
         data: totalPending,
       },
-      
     ],
   };
 
