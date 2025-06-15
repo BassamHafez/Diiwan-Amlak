@@ -72,7 +72,7 @@ const AddTask = ({ hideModal, refetch, propId, compId }) => {
       : "",
     contact: "",
     type: "",
-    cost: "",
+    cost: 0,
     priority: "",
   };
 

@@ -3,12 +3,13 @@ import RevenuesByMonth from "../../../Components/Charts/RevenuesByMonth";
 import styles from "./UserHome.module.css";
 
 const RevenueByMonthChart = ({ myData }) => {
-
   const { t: key } = useTranslation();
 
   return (
     <div className={`${styles.information_section} p-1`}>
-      <h4 className="fw-bold mx-2 my-4">{key("monthlyRevenues")}</h4>
+      <h4 className="fw-bold mx-2 my-4">
+        {key("monthlyRevenues")} <span className="sar_font">($)</span>
+      </h4>
       <RevenuesByMonth revenuesByMonth={myData?.revenuesByMonth} />
     </div>
   );

@@ -5,12 +5,13 @@ import { Navigation, Autoplay } from "swiper/modules";
 import AOS from "aos";
 import { mainFormsHandlerTypeRaw } from "../../util/Http";
 import TestimonialItem from "../../Components/TestimonialItem/TestimonialItem";
-import { useQuery, useEffect } from "../../shared/hooks";
+import { useQuery, useEffect, useTranslation } from "../../shared/hooks";
 import { like, dislike, love } from "../../shared/images";
 import { LoadingOne } from "../../shared/components";
 import styles from "./HomeTestimonalsSlider.module.css";
 
 const HomeTestimonalsSlider = () => {
+  const { i18n } = useTranslation();
   const { data, isFetching } = useQuery({
     queryKey: ["testimonials"],
     queryFn: () =>
@@ -37,11 +38,12 @@ const HomeTestimonalsSlider = () => {
             <img src={dislike} alt="dislike" className="w-100" />
           </div>
           <Swiper
+            key={i18n.dir()}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
-              reverseDirection: true,
+              reverseDirection: i18n.dir() === "rtl",
             }}
             loop={true}
             navigation={true}

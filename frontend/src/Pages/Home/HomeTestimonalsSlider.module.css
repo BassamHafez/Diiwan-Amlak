@@ -28,9 +28,10 @@
 .love_emotion {
   position: absolute;
   right: 10%;
-  bottom: 15%;
-  width: 12.5rem;
+  bottom: 5px;
+  width: 10.625rem;
   rotate: 30deg;
+  z-index: 30;
 }
 .like_emotion,
 .love_emotion,
