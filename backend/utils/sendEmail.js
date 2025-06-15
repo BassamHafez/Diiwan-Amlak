@@ -22,7 +22,7 @@ const sendEmail = async (
     });
 
     const mailOpts = {
-      from: "Diwan Amlak Website <" + process.env.EMAIL_USER + ">",
+      from: "Diiwan Amlak <" + process.env.EMAIL_USER + "> ديوان أملاك -",
       to: email,
       subject,
       text,
