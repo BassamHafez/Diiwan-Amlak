@@ -13,6 +13,7 @@ import {
 import { mainAlertTime } from "../Components/Logic/StaticLists";
 import Toaster from "../Components/Toaster/Toaster";
 import { packageTimeActions } from "../Store/packageTime-slice";
+import useAxiosInterceptor from "../hooks/useAxiosInterceptor";
 
 const USER_ROLES = {
   ADMIN: "admin",
@@ -30,6 +31,7 @@ const Root = () => {
   const subColor = useSelector((state) => state.configs.subColor);
   let subscriptionEndDate = accountInfo?.account?.subscriptionEndDate;
   const dispatch = useDispatch();
+  useAxiosInterceptor();
 
   //phone notifications
   useEffect(() => {

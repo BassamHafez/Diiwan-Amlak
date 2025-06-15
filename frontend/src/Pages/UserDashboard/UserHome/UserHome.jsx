@@ -106,74 +106,83 @@ const UserHome = () => {
     );
   }, [isTimeExpired, key]);
 
+  if (!accountInfo) {
+    return (
+      <div className="height_container d-flex justify-content-center align-items-center">
+        <LoadingOne />
+      </div>
+    );
+  }
+
+  if (!isAnalysisAllowed) {
+    return (
+      <div className="height_container d-flex justify-content-center align-items-center">
+        <NoData
+          type="upgrade"
+          verySmallSize={true}
+          text={`${key("upgradePackage")} ${key("isAnalysisAllowed")}`}
+        />
+        {expiredAlert}
+      </div>
+    );
+  }
+
   return (
     <div className="height_container d-flex flex-column justify-content-center align-items-center px-2 py-5 p-md-4">
-      {isAnalysisAllowed === undefined && <LoadingOne />}
-      {isAnalysisAllowed ? (
-        <>
-          {isFetching && <LoadingOne />}
-          <ScrollTopBtn />
-          <Row className="g-3 w-100 height_container">
-            <Col xl={3} md={4} className="my-3">
-              <CirleNumbers
-                myData={myData}
-                totalExpenses={totalExpenses}
-                totalRevenues={totalRevenues}
-              />
-            </Col>
+      <>
+        {isFetching && <LoadingOne />}
+        <ScrollTopBtn />
+        <Row className="g-3 w-100 height_container">
+          <Col xl={3} md={4} className="my-3">
+            <CirleNumbers
+              myData={myData}
+              totalExpenses={totalExpenses}
+              totalRevenues={totalRevenues}
+            />
+          </Col>
 
-            <Col xl={9} md={8}>
-              <Row className="g-3 w-100">
-                {expiredAlert}
+          <Col xl={9} md={8}>
+            <Row className="g-3 w-100">
+              {expiredAlert}
 
-                <Col md={12} className="my-3">
-                  <FinancialOverview
-                    myData={myData}
-                    totalExpenses={totalExpenses}
-                    totalRevenues={totalRevenues}
-                  />
-                </Col>
+              <Col md={12} className="my-3">
+                <FinancialOverview
+                  myData={myData}
+                  totalExpenses={totalExpenses}
+                  totalRevenues={totalRevenues}
+                />
+              </Col>
 
-                <Col md={12} className="my-3">
-                  <RevenueByMonthChart myData={myData} />
-                </Col>
-              </Row>
-            </Col>
+              <Col md={12} className="my-3">
+                <RevenueByMonthChart myData={myData} />
+              </Col>
+            </Row>
+          </Col>
 
-            <TodayExAndRev
+          <TodayExAndRev
+            myData={myData}
+            getStatusBgColor={getStatusBgColor}
+            showDetails={showDetails}
+          />
+          <CheckSubscriptionRender
+            name="isTasksAllowed"
+            accountData={accountInfo?.account}
+          >
+            <OverdueTasks
+              myData={myData}
+              refetch={refetch}
+              accountInfo={accountInfo}
+            />
+          </CheckSubscriptionRender>
+          <Col sm={12}>
+            <PendingRevenues
               myData={myData}
               getStatusBgColor={getStatusBgColor}
               showDetails={showDetails}
             />
-            <CheckSubscriptionRender
-              name="isTasksAllowed"
-              accountData={accountInfo?.account}
-            >
-              <OverdueTasks
-                myData={myData}
-                refetch={refetch}
-                accountInfo={accountInfo}
-              />
-            </CheckSubscriptionRender>
-            <Col sm={12}>
-              <PendingRevenues
-                myData={myData}
-                getStatusBgColor={getStatusBgColor}
-                showDetails={showDetails}
-              />
-            </Col>
-          </Row>
-        </>
-      ) : (
-        <div>
-          <NoData
-            type="upgrade"
-            verySmallSize={true}
-            text={`${key("upgradePackage")} ${key("isAnalysisAllowed")}`}
-          />
-          {expiredAlert}
-        </div>
-      )}
+          </Col>
+        </Row>
+      </>
     </div>
   );
 };

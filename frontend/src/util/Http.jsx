@@ -1,4 +1,5 @@
-import axios from "axios";
+import axiosInstance from "../Components/Logic/LogicFun";
+
 const baseServerUrl = import.meta.env.VITE_Base_API_URL;
 const validFormMethods = ["post", "patch", "put"];
 
@@ -6,12 +7,15 @@ export const signFormsHandler = async ({ type, formData, method }) => {
   try {
     let response = null;
     if (method === "put") {
-      response = await axios.put(
+      response = await axiosInstance.put(
         `${baseServerUrl}auth/resetPassword`,
         formData
       );
     } else {
-      response = await axios.post(`${baseServerUrl}auth/${type}`, formData);
+      response = await axiosInstance.post(
+        `${baseServerUrl}auth/${type}`,
+        formData
+      );
     }
     return response;
   } catch (error) {
@@ -40,7 +44,7 @@ export const mainFormsHandlerTypeFormData = async ({
   try {
     let response = null;
     if (validFormMethods.includes(method)) {
-      response = await axios[method](myUrl, formData, {
+      response = await axiosInstance[method](myUrl, formData, {
         headers,
       });
     } else {
@@ -48,7 +52,7 @@ export const mainFormsHandlerTypeFormData = async ({
         console.error("Unauthorized");
         return null;
       }
-      response = await axios.get(myUrl, {
+      response = await axiosInstance.get(myUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -76,11 +80,11 @@ export const mainFormsHandlerTypeRaw = async ({
   try {
     let response = null;
     if (validFormMethods.includes(method)) {
-      response = await axios[method](url, formData, {
+      response = await axiosInstance[method](url, formData, {
         headers,
       });
     } else {
-      response = await axios.get(url, {
+      response = await axiosInstance.get(url, {
         headers,
         params: isLimited ? { limit: Infinity } : undefined,
       });
@@ -94,7 +98,7 @@ export const mainFormsHandlerTypeRaw = async ({
 
 export const mainDeleteFunHandler = async ({ id, token, type }) => {
   try {
-    const response = await axios.delete(
+    const response = await axiosInstance.delete(
       `${import.meta.env.VITE_Base_API_URL}${type}/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -109,7 +113,7 @@ export const mainDeleteFunHandler = async ({ id, token, type }) => {
 
 export const mainEmptyBodyFun = async ({ token, type, method }) => {
   try {
-    const response = await axios[method](
+    const response = await axiosInstance[method](
       `${baseServerUrl}${type}`,
       {},
       {
@@ -126,7 +130,7 @@ export const mainEmptyBodyFun = async ({ token, type, method }) => {
 
 export const getPublicData = async ({ type }) => {
   try {
-    const response = await axios.get(`${baseServerUrl}${type}`);
+    const response = await axiosInstance.get(`${baseServerUrl}${type}`);
     return response.data;
   } catch (error) {
     console.error(error);

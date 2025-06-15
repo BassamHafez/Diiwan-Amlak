@@ -1,12 +1,12 @@
-import axios from "axios";
 import { accountActions } from "./accountInfo-slice";
+import axiosInstance from "../Components/Logic/LogicFun";
 
 const baseServerUrl = import.meta.env.VITE_Base_API_URL;
 
 const fetchAccountData = (token) => {
   return async (dispatch) => {
       try {
-        const response = await axios.get(`${baseServerUrl}accounts/my-account`, {
+        const response = await axiosInstance.get(`${baseServerUrl}accounts/my-account`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const res = response.data;

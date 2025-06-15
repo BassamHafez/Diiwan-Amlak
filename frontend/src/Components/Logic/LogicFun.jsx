@@ -12,8 +12,15 @@ import {
   format,
   differenceInCalendarYears,
 } from "date-fns";
+import axios from "axios";
 
 // main func
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_Base_API_URL,
+});
+
+export default axiosInstance;
+
 const notifyAlert = () =>
   toast.warn(<VerifyPhoneAlert isModalAlert={true} />, {
     autoClose: false,

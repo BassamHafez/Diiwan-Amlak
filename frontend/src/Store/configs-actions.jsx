@@ -1,5 +1,5 @@
-import axios from "axios";
 import { configActions } from "./configs-slice";
+import axiosInstance from "../Components/Logic/LogicFun";
 const baseServerUrl = import.meta.env.VITE_Base_API_URL;
 
 const findConfigByKey = (arr, targetKey) => {
@@ -11,7 +11,7 @@ const findConfigByKey = (arr, targetKey) => {
 const fetchConfigs = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${baseServerUrl}configs`);
+      const response = await axiosInstance.get(`${baseServerUrl}configs`);
       const res = response?.data;
 
       dispatch(
