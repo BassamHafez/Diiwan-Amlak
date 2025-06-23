@@ -12,16 +12,10 @@ export const saveTokenState = (token) => {
   };
 };
 
-export const getToken = () => {
-  return (dispatch) => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    dispatch(userActions.setToken(token));
-  };
-};
-
-export const getRoleState = () => {
-  return (dispatch) => {
-    const role = JSON.parse(localStorage.getItem("role"));
-    dispatch(userActions.setRole(role));
-  };
+export const initializeAuth = () => (dispatch) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const role = JSON.parse(localStorage.getItem("role"));
+  dispatch(userActions.setToken(token));
+  dispatch(userActions.setRole(role));
+  dispatch(userActions.setAuthInitialized());
 };

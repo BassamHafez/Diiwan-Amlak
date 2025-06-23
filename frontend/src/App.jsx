@@ -5,13 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getRoleState,
-  // getisLoginState,
-  // getRoleState,
-  getToken,
-  // getUserInfoFromLocalStorage,
-} from "./Store/userInfo-actions";
+import { initializeAuth } from "./Store/userInfo-actions";
 import fetchProfileData from "./Store/profileInfo-actions";
 import fetchAccountData from "./Store/accountInfo-actions";
 import fetchConfigs from "./Store/configs-actions";
@@ -293,6 +287,28 @@ function App() {
 
   const token = useSelector((state) => state.userInfo.token);
   const role = useSelector((state) => state.userInfo.role);
+  const isAuthInitialized = useSelector(
+    (state) => state.userInfo.isAuthInitialized
+  );
+
+  // Get localStorage auth on startup
+  useEffect(() => {
+    dispatch(initializeAuth());
+  }, [dispatch]);
+
+  // Fetch user profile after auth is initialized
+  useEffect(() => {
+    if (isAuthInitialized && token) {
+      dispatch(fetchProfileData(token));
+    }
+  }, [dispatch, token, isAuthInitialized]);
+
+  // Fetch account if user is logged in
+  useEffect(() => {
+    if (isAuthInitialized && token && role === "user") {
+      dispatch(fetchAccountData(token));
+    }
+  }, [dispatch, token, role, isAuthInitialized]);
 
   useEffect(() => {
     const updateDirections = () => {
@@ -316,28 +332,6 @@ function App() {
   //fetchMainConfigs
   useEffect(() => {
     dispatch(fetchConfigs());
-  }, [dispatch]);
-
-  // get profile data from api
-  useEffect(() => {
-    if (token) {
-      dispatch(fetchProfileData(token));
-    }
-  }, [dispatch, token]);
-
-  // get account data from api
-  useEffect(() => {
-    if ((token, role === "user")) {
-      dispatch(fetchAccountData(token));
-    }
-  }, [dispatch, token, role]);
-
-  // recieve user data from localStorage with login and role states
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("token"))) {
-      dispatch(getRoleState());
-      dispatch(getToken());
-    }
   }, [dispatch]);
 
   return (

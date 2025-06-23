@@ -9,8 +9,8 @@ const useSignOut = () => {
     localStorage.removeItem("role");
     localStorage.removeItem("token");
     localStorage.removeItem("lastNotificationTime");
-    dispatch(userActions.setToken(null));
-    dispatch(userActions.setRole(""));
+
+    dispatch(userActions.clearAuth());
     dispatch(profileActions.setProfileInfo(null));
   };
 

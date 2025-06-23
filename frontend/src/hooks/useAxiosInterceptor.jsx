@@ -1,24 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {
+  useEffect,
+  useNavigate,
+  useSignOut,
+} from "../shared/hooks";
 import axiosInstance from "../Components/Logic/LogicFun";
-import { userActions } from "../Store/userInfo-slice";
-import { profileActions } from "../Store/profileInfo-slice";
 
 const useAxiosInterceptor = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const signOut = useSignOut();
 
   useEffect(() => {
-    const signOut = () => {
-      localStorage.removeItem("role");
-      localStorage.removeItem("token");
-      localStorage.removeItem("lastNotificationTime");
-      dispatch(userActions.setToken(null));
-      dispatch(userActions.setRole(""));
-      dispatch(profileActions.setProfileInfo(null));
-    };
-
     const responseInterceptor = axiosInstance.interceptors.response.use(
       (response) => response,
       (error) => {
@@ -40,7 +31,7 @@ const useAxiosInterceptor = () => {
     return () => {
       axiosInstance.interceptors.response.eject(responseInterceptor);
     };
-  }, [dispatch, navigate]);
+  }, [navigate, signOut]);
 };
 
 export default useAxiosInterceptor;

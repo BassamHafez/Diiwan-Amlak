@@ -6,6 +6,7 @@ const userInfoSlice = createSlice({
     data: null,
     role: "",
     token: "",
+    isAuthInitialized: false, 
   },
   reducers: {
     setUserInfo(state, action) {
@@ -16,6 +17,17 @@ const userInfoSlice = createSlice({
     },
     setToken(state, action) {
       state.token = action.payload;
+    },
+    
+    setAuthInitialized(state) {
+      state.isAuthInitialized = true;
+    },
+
+    clearAuth(state) {
+      state.token = "";
+      state.role = "";
+      state.data = null;
+      state.isAuthInitialized = true;
     },
   },
 });
