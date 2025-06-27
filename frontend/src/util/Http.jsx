@@ -62,7 +62,7 @@ export const mainFormsHandlerTypeFormData = async ({
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error; 
   }
 };
 
@@ -92,7 +92,7 @@ export const mainFormsHandlerTypeRaw = async ({
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error; 
   }
 };
 
@@ -107,7 +107,7 @@ export const mainDeleteFunHandler = async ({ id, token, type }) => {
     return response;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error; 
   }
 };
 
@@ -124,7 +124,7 @@ export const mainEmptyBodyFun = async ({ token, type, method }) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error; 
   }
 };
 
@@ -134,6 +134,6 @@ export const getPublicData = async ({ type }) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error; 
   }
 };
