@@ -1,39 +1,36 @@
-import { useTranslation } from "react-i18next";
 import styles from "./Reports.module.css";
 import {
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
-  renamedContractStatus,
 } from "../../../Components/Logic/LogicFun";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { analyticalReportTable } from "../../../Components/Logic/StaticLists";
 import {
-  contractsReportTable,
-  contractStatusOptions,
-} from "../../../Components/Logic/StaticLists";
-import { useCallback, useMemo, useState } from "react";
+  useCallback,
+  useMemo,
+  useState,
+  useSelector,
+  useTranslation,
+} from "../../../shared/hooks";
 import ReportsForm from "./ReportForms/ReportsForm";
 import CheckPermissions from "../../../Components/CheckPermissions/CheckPermissions";
 import ButtonOne from "../../../Components/UI/Buttons/ButtonOne";
 import PrintContractsReport from "../../../Components/Prints/PrintContractsReport";
-import Select from "react-select";
 import MainTitle from "../../../Components/UI/Words/MainTitle";
-import { useSelector } from "react-redux";
 import { CheckMySubscriptions } from "../../../shared/components";
 
-const OperationalReport = ({
+const AnalyticalReport = ({
   compoundsOptions,
   estatesOptions,
   landlordOptions,
   filterType,
 }) => {
-  const [contractsData, setContractsData] = useState([]);
-  const [resultFilter, setResultFilter] = useState("");
+  const [analyticalData, setAnlayricalData] = useState([]);
   const [dataEnteried, setDataEnteried] = useState({
     startDueDate: "",
     endDueDate: "",
-    status: "",
     compound: "",
     landlord: "",
     estate: "",
@@ -41,94 +38,62 @@ const OperationalReport = ({
   const profileInfo = useSelector((state) => state.profileInfo.data);
   const accountInfo = useSelector((state) => state.accountInfo.data);
   const { t: key } = useTranslation();
-  let isArLang = localStorage.getItem("i18nextLng") === "ar";
 
-  const currentLang = isArLang ? "ar" : "en";
-
-  const getSearchData = useCallback((contractsData, formValues) => {
-    setContractsData(contractsData);
+  const getSearchData = useCallback((analyticalData, formValues) => {
+    setAnlayricalData(analyticalData);
     setDataEnteried(formValues);
   }, []);
 
-  const getStatusBgColor = useCallback((status) => {
-    switch (status) {
-      case "active":
-        return styles.green;
-      case "completed":
-        return styles.blue;
-      case "canceled":
-        return styles.red;
-      case "upcoming":
-        return styles.yellow;
-      default:
-        return "";
-    }
-  }, []);
-
-  const filterChangeHandler = (val) => {
-    setResultFilter(val ? val : "");
-  };
-
-  const filteredResults = useMemo(() => {
-    return contractsData && Array.isArray(contractsData)
-      ? contractsData.filter(
-          (item) =>
-            resultFilter === "" ||
-            item.status.trim().toLocaleLowerCase() ===
-              resultFilter.trim().toLocaleLowerCase()
-        )
-      : [];
-  }, [contractsData, resultFilter]);
-
-  const filteredContractsReport = useMemo(() => {
-    const contractsReport = [...(contractsData || [])];
-    return contractsReport?.map((ex) => {
+  const filterAnalyticalReport = useMemo(() => {
+    const analyticalReport = [...(analyticalData || [])];
+    return analyticalReport?.map((ex) => {
       return {
         [key("estate")]: ex?.estate?.name || ex?.compound?.name || "-",
-        [key("theTenant")]: ex?.tenant?.name || "-",
+        [key("properties")]: ex?.compound || "-",
         [key("startDate")]: formattedDate(ex?.startDate || "-"),
         [key("endDate")]: formattedDate(ex?.endDate || "-"),
-        [key("amount")]: ex?.totalAmount || "-",
-        [key("status")]: renamedContractStatus(ex?.status, currentLang) || "-",
+        [key("totalIncome2")]: ex?.totalIncome || "-",
+        [key("totalExpenses")]: ex?.totalExpenses || "-",
+        [key("operatingRatio")]: ex?.operatingRatio || "-",
+        [key("netIncome")]: ex?.netIncome || "-",
+        [key("operatingRatioForNetIncome")]:
+          ex?.operatingRatioForNetIncome || "-",
+        [key("status")]: ex?.status || "-",
       };
     });
-  }, [contractsData, key, currentLang]);
+  }, [analyticalData, key]);
 
   const operationalTable = useMemo(() => {
     return (
       <table className={`${styles.contract_table} table`}>
         <thead className={styles.table_head}>
           <tr>
-            {contractsReportTable?.map((title, index) => (
+            {analyticalReportTable?.map((title, index) => (
               <th key={`${title}_${index}`}>{key(title)}</th>
             ))}
           </tr>
         </thead>
 
         <tbody className={styles.table_body}>
-          {filteredResults?.length > 0 ? (
-            filteredResults?.map((item, index) => (
+          {analyticalData?.length > 0 ? (
+            analyticalData?.map((item, index) => (
               <tr key={index}>
                 <td>{item.estate?.name || item.compound?.name || "-"}</td>
-                <td>{item.tenant?.name || "-"}</td>
+                <td>{item.compound || "-"}</td>
                 <td>{formattedDate(item.startDate || "-")}</td>
                 <td>{formattedDate(item.endDate || "-")}</td>
-                <td>{item.totalAmount}</td>
-                <td>
-                  <span
-                    className={`${getStatusBgColor(item.status)} ${
-                      styles.status_span
-                    }`}
-                  >
-                    {renamedContractStatus(item.status, currentLang)}
-                  </span>
-                </td>
+                <td>{item.totalIncome}</td>
+                <td>{item.totalExpenses}</td>
+                <td>{item.operatingRatio}</td>
+                <td>{item.netIncome}</td>
+                <td>{item.operatingRatioForNetIncome}</td>
+                <td>{item.status}</td>
               </tr>
             ))
           ) : (
             <tr>
               <td
-                colSpan={`${contractsReportTable.length || "5"}`}
+                colSpan={`${analyticalReportTable.length || "5"}`}
                 className="py-5"
               >
                 <div className="d-flex flex-column justify-content-center align-items-center">
@@ -144,22 +109,22 @@ const OperationalReport = ({
         </tbody>
       </table>
     );
-  }, [filteredResults, getStatusBgColor, key, currentLang]);
+  }, [key, analyticalData]);
 
   const exportCsvHandler = useCallback(() => {
     handleDownloadExcelSheet(
-      filteredContractsReport,
+      filterAnalyticalReport,
       `${key(filterType)}.xlsx`,
       `${key(filterType)}`,
       accountInfo?.account?.isFilesExtractAllowed,
       accountInfo?.account?.isVIP
     );
-  }, [filteredContractsReport, accountInfo, filterType, key]);
+  }, [filterAnalyticalReport, accountInfo, filterType, key]);
 
   const downloadPdfHandler = useCallback(() => {
     generatePDF(
-      `contractsReport_${dataEnteried?.startDueDate}`,
-      `${key("contractsReport")}_(${dataEnteried?.startDueDate}) (${
+      `analyticalReport_${dataEnteried?.startDueDate}`,
+      `${key("analyticalReport")}_(${dataEnteried?.startDueDate}) (${
         dataEnteried?.endDueDate
       }) ${dataEnteried?.estate || dataEnteried.compound || ""}`,
       accountInfo?.account?.isFilesExtractAllowed,
@@ -171,7 +136,7 @@ const OperationalReport = ({
     <>
       <div>
         <div className="my-3">
-          <MainTitle>{key("contractsReport")}</MainTitle>
+          <MainTitle>{key("analyticalReport")}</MainTitle>
         </div>
         <div className="p-md-5">
           <ReportsForm
@@ -186,32 +151,17 @@ const OperationalReport = ({
         <hr />
 
         <div>
-          <MainTitle>{key("contracts")}</MainTitle>
+          <MainTitle>{key("analyticalReport")}</MainTitle>
           <div className={styles.header}>
-            <Select
-              options={
-                isArLang
-                  ? contractStatusOptions["ar"]
-                  : contractStatusOptions["en"]
-              }
-              onChange={(val) => filterChangeHandler(val ? val.value : null)}
-              className={`${isArLang ? "text-end me-2" : "text-start ms-2"} ${
-                styles.select_type
-              } my-3`}
-              isRtl={isArLang ? true : false}
-              placeholder={key("category")}
-              isClearable
-            />
-
             <div>
-              {contractsData && contractsData?.length > 0 && (
+              {analyticalData && analyticalData?.length > 0 && (
                 <CheckMySubscriptions
                   name="isFilesExtractAllowed"
                   accountInfo={accountInfo}
                 >
                   <CheckPermissions
                     profileInfo={profileInfo}
-                    btnActions={["CONTRACTS_REPORTS"]}
+                    btnActions={["FINANCIAL_REPORTS"]}
                   >
                     <ButtonOne
                       classes="m-2"
@@ -236,8 +186,8 @@ const OperationalReport = ({
       </div>
       <div className="d-none">
         <PrintContractsReport
-          id={`contractsReport_${dataEnteried?.startDueDate}`}
-          contractsData={contractsData}
+          id={`analyticalReport_${dataEnteried?.startDueDate}`}
+          analyticalData={analyticalData}
           dataEnteried={dataEnteried}
           operationalTable={operationalTable}
         />
@@ -246,4 +196,4 @@ const OperationalReport = ({
   );
 };
 
-export default OperationalReport;
+export default AnalyticalReport;

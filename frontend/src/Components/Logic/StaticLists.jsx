@@ -278,6 +278,20 @@ export const contractsReportTable = [
   "amount",
   "status",
 ];
+
+export const analyticalReportTable = [
+  "estate",
+  "properties",
+  "startDate",
+  "endDate",
+  "totalIncome2",
+  "totalExpenses",
+  "operatingRatio",
+  "netIncome",
+  "operatingRatioForNetIncome",
+  "status",
+];
+
 export const compoundsReportTable = ["category", "estate", "total"];
 
 //support

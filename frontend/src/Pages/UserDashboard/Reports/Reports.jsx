@@ -13,6 +13,7 @@ import {
   faMoneyBillTrendUp,
   faSackDollar,
   faTags,
+  // faMagnifyingGlassChart,
 } from "../../../shared/constants";
 import {
   useState,
@@ -28,6 +29,7 @@ import {
   CheckSubscriptionRender,
   LoadingOne,
 } from "../../../shared/components";
+// import AnalyticalReport from "./AnalyticalReport";
 
 const Reports = () => {
   const [reportTypeFilter, setReportTypeFilter] = useState("landlordReport");
@@ -124,6 +126,27 @@ const Reports = () => {
                       </li>
                     </CheckPermissions>
                   </CheckMySubscriptions>
+                  {/* <CheckMySubscriptions
+                    name="isFinancialReportsAllowed"
+                    accountInfo={accountInfo}
+                  >
+                    <CheckPermissions
+                      profileInfo={profileInfo}
+                      btnActions={["FINANCIAL_REPORTS"]}
+                    >
+                      <li
+                        className={
+                          reportTypeFilter === "analyticalReport"
+                            ? styles.active
+                            : ""
+                        }
+                        onClick={() => setReportTypeFilter("analyticalReport")}
+                      >
+                        {circleIcon}
+                        {key("analyticalReport")}
+                      </li>
+                    </CheckPermissions>
+                  </CheckMySubscriptions> */}
                 </ul>
 
                 <hr />
@@ -263,6 +286,28 @@ const Reports = () => {
                     )}
                   </CheckPermissions>
                 </CheckMySubscriptions>
+
+                {/* <CheckMySubscriptions
+                  name="isFinancialReportsAllowed"
+                  accountInfo={accountInfo}
+                >
+                  <CheckPermissions
+                    profileInfo={profileInfo}
+                    btnActions={["FINANCIAL_REPORTS"]}
+                  >
+                    {reportTypeFilter === "analyticalReport" && (
+                      <ul className={styles.filter_list}>
+                        <li className={styles.active}>
+                          <FontAwesomeIcon
+                            className={`${iconClass}`}
+                            icon={faMagnifyingGlassChart}
+                          />
+                          {key("FinancialAndOperationalPerformance")}
+                        </li>
+                      </ul>
+                    )}
+                  </CheckPermissions>
+                </CheckMySubscriptions> */}
               </div>
             </div>
           </Col>
@@ -324,6 +369,20 @@ const Reports = () => {
                   </CheckSubscriptionRender>
                 )
               )}
+
+              {/* {reportTypeFilter === "analyticalReport" && (
+                <CheckSubscriptionRender
+                  name="isFinancialReportsAllowed"
+                  accountData={accountData}
+                >
+                  <AnalyticalReport
+                    landlordOptions={landlordOptions}
+                    compoundsOptions={compoundsOptions}
+                    estatesOptions={estatesOptions}
+                    filterType="analyticalReport"
+                  />
+                </CheckSubscriptionRender>
+              )} */}
             </div>
           </Col>
         </Row>

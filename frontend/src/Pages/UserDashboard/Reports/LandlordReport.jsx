@@ -102,14 +102,14 @@ const LandlordReport = ({
         return {
           [key("category")]: key(ex?.category) || "-",
           [key("estate")]: ex?.estateName || "-",
-          [`${key("total")} (${<span className="sar_font">$</span>})`]: ex?.total || "-",
+          [key("total")]: ex?.total || "-",
         };
       } else if (filterType === "incomeReportDetails") {
         return {
           [key("category")]: key(ex?.category) || "-",
           [key("estate")]: ex.estate?.name || ex.compound?.name || "-",
           [key("theTenant")]: ex.tenant?.name || "-",
-          [`${key("total")} (${<span className="sar_font">$</span>})`]: ex?.amount || "-",
+          [key("total")]: ex?.amount || "-",
           [key("recDate")]: formattedDate(ex?.paidAt) || "-",
           [key("recMethod")]: key(ex?.paymentMethod) || "-",
         };
@@ -118,7 +118,7 @@ const LandlordReport = ({
           [key("category")]: key(ex?.category) || "-",
           [key("estate")]: ex.estate?.name || ex?.compound?.name || "-",
           [key("theTenant")]: ex?.tenant?.name || "-",
-          [`${key("total")} (${<span className="sar_font">$</span>})`]: ex?.amount || "-",
+          [key("total")]: ex?.amount || "-",
           [key("dueDate")]: formattedDate(ex?.dueDate) || "-",
           [key("type")]: key(ex?.type) || "-",
           [key("status")]: key(ex?.status) || "-",

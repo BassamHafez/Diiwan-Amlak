@@ -26,7 +26,7 @@ const ContactForm = ({ isVip, hideModal }) => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: mainFormsHandlerTypeRaw,
-  });
+  }); 
 
   const initialValues = {
     name: profileInfo?.name || "",

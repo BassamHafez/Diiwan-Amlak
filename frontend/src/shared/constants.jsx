@@ -56,6 +56,7 @@ export {
   faShieldAlt,
   faCheckCircle,
   faCircleXmark,
+  faMagnifyingGlassChart
 } from "@fortawesome/free-solid-svg-icons";
 export {
   faFolderOpen,

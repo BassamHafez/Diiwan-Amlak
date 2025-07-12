@@ -74,7 +74,7 @@ const CompoundsReport = ({ compoundsOptions, landlordOptions, filterType }) => {
       return {
         [key("category")]: key(comp?.category) || "-",
         [key("estate")]: comp?.compoundName || "-",
-        [`${key("total")} (${<span className="sar_font">$</span>})`]: comp?.total || "-",
+        [key("total")]: comp?.total || "-",
       };
     });
   }, [combinedData, key]);
