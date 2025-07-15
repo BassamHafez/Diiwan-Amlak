@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 import CheckPermissions from "../../../Components/CheckPermissions/CheckPermissions";
 import { useQueryClient } from "@tanstack/react-query";
 import useDeleteItem from "../../../hooks/useDeleteItem";
+import { convertNumbersToFixedTwo } from "../../../Components/Logic/LogicFun";
 
 const TaskItem = ({ task, refetch, compId, propId }) => {
   const [showUpdateTaskModal, setShowUpdateTaskModal] = useState(false);
@@ -162,7 +163,8 @@ const TaskItem = ({ task, refetch, compId, propId }) => {
                   icon={faCoins}
                   className={`${isArLang ? "ms-1" : "me-1"} color-main`}
                 />{" "}
-                {task.cost} {<span className="sar_font">$</span>}
+                {convertNumbersToFixedTwo(task.cost)}{" "}
+                <span className="sar_font">$</span>
               </span>
             </div>
             <div>

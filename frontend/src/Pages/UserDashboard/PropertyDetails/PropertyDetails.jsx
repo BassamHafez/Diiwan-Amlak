@@ -257,8 +257,8 @@ const PropertyDetails = () => {
                       >
                         <div className={styles.main_details}>
                           <span>{key("totalPaidRevenues")}</span>
-                          <p>
-                            {totalPaidRev} {<span className="sar_font">$</span>}
+                          <p className="text-break">
+                            {totalPaidRev} <span className="sar_font">$</span>
                           </p>
                         </div>
                       </Col>
@@ -270,8 +270,8 @@ const PropertyDetails = () => {
                       >
                         <div className={styles.main_details}>
                           <span>{key("uncollectedAmount")}</span>
-                          <p>
-                            {totalPendingRev} {<span className="sar_font">$</span>}
+                          <p className="text-break">
+                            {totalPendingRev} <span className="sar_font">$</span>
                           </p>
                         </div>
                       </Col>
@@ -283,8 +283,8 @@ const PropertyDetails = () => {
                       >
                         <div className={styles.main_details}>
                           <span>{key("totalPaidCosts")}</span>
-                          <p>
-                            {totalPaidEx} {<span className="sar_font">$</span>}
+                          <p className="text-break">
+                            {totalPaidEx} <span className="sar_font">$</span>
                           </p>
                         </div>
                       </Col>
@@ -296,8 +296,8 @@ const PropertyDetails = () => {
                       >
                         <div className={styles.main_details}>
                           <span>{key("totalUnPaidCosts")}</span>
-                          <p>
-                            {totalUnPaidCosts} {<span className="sar_font">$</span>}
+                          <p className="text-break">
+                            {totalUnPaidCosts} <span className="sar_font">$</span>
                           </p>
                         </div>
                       </Col>
@@ -309,7 +309,7 @@ const PropertyDetails = () => {
                       >
                         <div className={styles.main_details}>
                           <span>{key("collectionRatio")}</span>
-                          <p>{collectionRatio} %</p>
+                          <p className="text-break">{collectionRatio} %</p>
                         </div>
                       </Col>
                       <Col
@@ -326,7 +326,7 @@ const PropertyDetails = () => {
                           >
                             {key("grandReturns")}
                           </span>
-                          <p>{grandReturns} %</p>
+                          <p className="text-break">{grandReturns} %</p>
                         </div>
                       </Col>
                       <Col
@@ -343,7 +343,7 @@ const PropertyDetails = () => {
                           >
                             {key("netReturns")}
                           </span>
-                          <p>{netReturns} %</p>
+                          <p className="text-break">{netReturns} %</p>
                         </div>
                       </Col>
                       <Col
@@ -354,7 +354,7 @@ const PropertyDetails = () => {
                       >
                         <div className={styles.main_details}>
                           <span>{key("area")}</span>
-                          <p>
+                          <p className="text-break">
                             {area} {key("areaUnit")}
                           </p>
                         </div>
@@ -385,7 +385,7 @@ const PropertyDetails = () => {
                     >
                       <div className={styles.header_footerItem}>
                         <span>{key("nextPaymentDue")}</span>
-                        <p>
+                        <p className="text-break">
                           {formattedDate(
                             currentContract?.data?.nextRevenue?.dueDate
                           )}
@@ -398,9 +398,9 @@ const PropertyDetails = () => {
                     >
                       <div className={styles.header_footerItem}>
                         <span>{key("nextPaymentAmount")}</span>
-                        <p>
+                        <p className="text-break">
                           {currentContract?.data?.nextRevenue?.amount || 0}{" "}
-                          {<span className="sar_font">$</span>}
+                          <span className="sar_font">$</span>
                         </p>
                       </div>
                     </Col>

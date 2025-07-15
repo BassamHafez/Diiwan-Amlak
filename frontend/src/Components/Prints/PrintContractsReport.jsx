@@ -1,6 +1,11 @@
 import styles from "./PrintContract.module.css";
 import { useSelector, useTranslation } from "../../shared/hooks";
-import { MainTitle, PrintNavBar, ReportsDetailsHeader } from "../../shared/components";
+import {
+  MainTitle,
+  PrintNavBar,
+  ReportsDetailsHeader,
+} from "../../shared/components";
+import { convertNumbersToFixedTwo } from "../Logic/LogicFun";
 
 const PrintContractsReport = ({
   id,
@@ -35,7 +40,10 @@ const PrintContractsReport = ({
 
       <div className={styles.information}>
         <div className="d-flex justify-content-center">
-          <MainTitle small={true} title={isCompoundDetails ? key("compound") : key("incomePerEstate")}/>
+          <MainTitle
+            small={true}
+            title={isCompoundDetails ? key("compound") : key("incomePerEstate")}
+          />
         </div>
         <div className="scrollableTable">
           {compoundDetailsTable && isCompoundDetails
@@ -45,7 +53,8 @@ const PrintContractsReport = ({
 
         {!isCompoundDetails && (
           <p className="my-4 fw-bold">
-            {key("totalAmount")} : {totalAmount} {<span className="sar_font">$</span>}
+            {key("totalAmount")} : {convertNumbersToFixedTwo(totalAmount)}{" "}
+            <span className="sar_font">$</span>
           </p>
         )}
       </div>

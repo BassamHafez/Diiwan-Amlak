@@ -81,6 +81,8 @@ const AddTask = ({ hideModal, refetch, propId, compId }) => {
       ...values,
     };
 
+    console.log(updatedValues)
+
     if (!isCompound && updatedValues.estate) {
       updatedValues.estate = updatedValues.estate.value;
       updatedValues.compound = "";
@@ -147,7 +149,6 @@ const AddTask = ({ hideModal, refetch, propId, compId }) => {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
-      enableReinitialize
     >
       {({ setFieldValue, values }) => (
         <Form>
@@ -230,7 +231,7 @@ const AddTask = ({ hideModal, refetch, propId, compId }) => {
             <Col sm={6}>
               <div className="field">
                 <label htmlFor="cost">
-                  {key("cost")} ({<span className="sar_font">$</span>}) {requiredLabel}
+                  {key("cost")} (<span className="sar_font">$</span>) {requiredLabel}
                 </label>
                 <Field type="number" id="cost" name="cost" />
                 <ErrorMessage name="cost" component={InputErrorMessage} />

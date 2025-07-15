@@ -1,5 +1,6 @@
 import Chart from "react-apexcharts";
 import { useTranslation } from "react-i18next";
+import { convertNumbersToFixedTwo } from "../Logic/LogicFun";
 
 const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
   const { t: key } = useTranslation();
@@ -14,8 +15,12 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
     revenueData[month - 1] = { totalPaid, totalPending };
   });
 
-  const totalPaid = revenueData.map((data) => data.totalPaid);
-  const totalPending = revenueData.map((data) => data.totalPending);
+  const totalPaid = revenueData.map((data) =>
+    Number(convertNumbersToFixedTwo(data.totalPaid))
+  );
+  const totalPending = revenueData.map((data) =>
+    Number(convertNumbersToFixedTwo(data.totalPending))
+  );
 
   const chartData = {
     options: {
@@ -23,9 +28,8 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
         type: "bar",
         height: 350,
         stacked: true,
-
         toolbar: {
-          show: true,
+          show: false,
           tools: {
             download: true,
             selection: true,
@@ -78,16 +82,14 @@ const RevenuesByMonth = ({ revenuesByMonth = [] }) => {
       },
       tooltip: {
         y: {
-          formatter: (value) => `${value.toLocaleString()}`,
+          formatter: (value) => convertNumbersToFixedTwo(value),
         },
       },
       colors: ["#d39833", "#fad4a9", "#33b5e5", "#f44336"],
       dataLabels: {
         enabled: true,
         enabledOnSeries: [0],
-        formatter: function (val) {
-          return val;
-        },
+        formatter: (val) => convertNumbersToFixedTwo(val),
         textAnchor: "middle",
         distributed: false,
         offsetX: 0,

@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
@@ -137,7 +138,7 @@ const Contracts = ({ details, estateParentCompound, refetchDetails }) => {
         [key("phone")]: tenant.phone || "-",
         [key("startContract")]: formattedDate(contract?.startDate) || "-",
         [key("endContract")]: formattedDate(contract?.endDate) || "-",
-        [`${key("price")} ${<span className="sar_font">$</span>}`]: contract?.totalAmount || "-",
+        [key("price")]: convertNumbersToFixedTwo(contract?.totalAmount) || "-",
         [key("status")]:
           renamedContractStatus(contract?.status, currentLang) || "-",
         [key("agent")]: brokerName,
@@ -261,7 +262,7 @@ const Contracts = ({ details, estateParentCompound, refetchDetails }) => {
                           <td>{contract.tenant?.name}</td>
                           <td>{formattedDate(contract.startDate)}</td>
                           <td>{formattedDate(contract.endDate)}</td>
-                          <td>{contract.totalAmount}</td>
+                          <td>{convertNumbersToFixedTwo(contract.totalAmount)}</td>
                           <td>
                             <span
                               className={`${getStatusBgColor(

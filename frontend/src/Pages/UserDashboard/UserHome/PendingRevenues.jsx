@@ -1,6 +1,7 @@
 import styles from "./UserHome.module.css";
 import { useTranslation } from "../../../shared/hooks";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   renamedRevenuesStatus,
 } from "../../../Components/Logic/LogicFun";
@@ -33,7 +34,7 @@ const PendingRevenues = ({ myData, getStatusBgColor, showDetails }) => {
                 <tr key={rev._id}>
                   <td>{rev.estate?.name || rev.compound?.name || "-"}</td>
                   <td>{key(rev.type)}</td>
-                  <td>{rev.amount}</td>
+                  <td>{convertNumbersToFixedTwo(rev.amount)}</td>
                   <td>{formattedDate(rev.dueDate)}</td>
                   <td>
                     <span

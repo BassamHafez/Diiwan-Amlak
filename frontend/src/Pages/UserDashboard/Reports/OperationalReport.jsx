@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styles from "./Reports.module.css";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
@@ -88,7 +89,7 @@ const OperationalReport = ({
         [key("theTenant")]: ex?.tenant?.name || "-",
         [key("startDate")]: formattedDate(ex?.startDate || "-"),
         [key("endDate")]: formattedDate(ex?.endDate || "-"),
-        [key("amount")]: ex?.totalAmount || "-",
+        [key("amount")]: convertNumbersToFixedTwo(ex?.totalAmount) || "-",
         [key("status")]: renamedContractStatus(ex?.status, currentLang) || "-",
       };
     });
@@ -113,7 +114,7 @@ const OperationalReport = ({
                 <td>{item.tenant?.name || "-"}</td>
                 <td>{formattedDate(item.startDate || "-")}</td>
                 <td>{formattedDate(item.endDate || "-")}</td>
-                <td>{item.totalAmount}</td>
+                <td>{convertNumbersToFixedTwo(item.totalAmount)}</td>
                 <td>
                   <span
                     className={`${getStatusBgColor(item.status)} ${

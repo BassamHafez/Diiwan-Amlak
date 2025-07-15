@@ -1,4 +1,5 @@
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   renamedExpensesStatusMethod,
   renamedRevenuesStatus,
@@ -39,7 +40,7 @@ const TodayExAndRev = memo(({ getStatusBgColor, myData, showDetails }) => {
                     <tr key={ex._id}>
                       <td>{ex.estate?.name || ex.compound?.name || "-"}</td>
                       <td>{key(ex.type)}</td>
-                      <td>{ex.amount}</td>
+                      <td>{convertNumbersToFixedTwo(ex.amount)}</td>
                       <td>{formattedDate(ex.dueDate)}</td>
                       <td>
                         <span
@@ -106,7 +107,7 @@ const TodayExAndRev = memo(({ getStatusBgColor, myData, showDetails }) => {
                     <tr key={rev._id}>
                       <td>{rev.estate?.name || rev.compound?.name || "-"}</td>
                       <td>{key(rev.type)}</td>
-                      <td>{rev.amount}</td>
+                      <td>{convertNumbersToFixedTwo(rev.amount)}</td>
                       <td>{formattedDate(rev.dueDate)}</td>
                       <td>
                         <span

@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   renamedContractStatus,
@@ -104,7 +105,7 @@ const CurrentContract = ({ details, estateParentCompound, refetchDetails }) => {
                           currentContract?.data?.contract?.endDate
                         )}
                       </td>
-                      <td>{currentContract?.data?.contract?.totalAmount}</td>
+                      <td>{convertNumbersToFixedTwo(currentContract?.data?.contract?.totalAmount)}</td>
                       <td>
                         <span
                           className={`${styles.green} ${styles.status_span}`}

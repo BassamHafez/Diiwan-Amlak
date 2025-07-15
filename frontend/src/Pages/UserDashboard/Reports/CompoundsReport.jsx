@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styles from "./Reports.module.css";
 import {
+  convertNumbersToFixedTwo,
   generatePDF,
   handleDownloadExcelSheet,
 } from "../../../Components/Logic/LogicFun";
@@ -74,7 +75,7 @@ const CompoundsReport = ({ compoundsOptions, landlordOptions, filterType }) => {
       return {
         [key("category")]: key(comp?.category) || "-",
         [key("estate")]: comp?.compoundName || "-",
-        [key("total")]: comp?.total || "-",
+        [key("total")]: convertNumbersToFixedTwo(comp?.total) || "-",
       };
     });
   }, [combinedData, key]);
@@ -184,7 +185,7 @@ const CompoundsReport = ({ compoundsOptions, landlordOptions, filterType }) => {
                             : "text-success"
                         }`}
                       >
-                        {item.total}
+                        {convertNumbersToFixedTwo(item.total)}
                       </td>
                     </tr>
                   ))

@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   handleDownloadExcelSheet,
   renamedContractStatus,
@@ -85,8 +86,8 @@ const CompoundContracts = ({ compoundEstates }) => {
             [key("theTenant")]: findTenant(contract.tenant)?.name || "-",
             [key("startContract")]: formattedDate(contract?.startDate) || "-",
             [key("endContract")]: formattedDate(contract?.endDate) || "-",
-            [`${key("price")} ${<span className="sar_font">$</span>}`]:
-              contract?.totalAmount || "-",
+            [key("price")]:
+              convertNumbersToFixedTwo(contract?.totalAmount) || "-",
             [key("status")]:
               renamedContractStatus(contract?.status, currentLang) || "-",
           };
@@ -151,7 +152,9 @@ const CompoundContracts = ({ compoundEstates }) => {
                         <td>{findTenant(contract?.tenant)?.name}</td>
                         <td>{formattedDate(contract?.startDate)}</td>
                         <td>{formattedDate(contract?.endDate)}</td>
-                        <td>{contract?.totalAmount}</td>
+                        <td>
+                          {convertNumbersToFixedTwo(contract?.totalAmount)}
+                        </td>
                         <td>
                           <span
                             className={`${getStatusBgColor(contract?.status)} ${

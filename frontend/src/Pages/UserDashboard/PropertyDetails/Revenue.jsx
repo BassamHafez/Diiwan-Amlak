@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
@@ -191,7 +192,7 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
         [key("estate")]: estateParentCompound?.name || key("noCompound"),
         [key("theTenant")]: tenant.name || "-",
         [key("phone")]: tenant.phone || "-",
-        [`${key("amount")} ${<span className="sar_font">$</span>}`]: rev?.amount || "-",
+        [key("amount")]: convertNumbersToFixedTwo(rev?.amount) || "-",
         [key("dueDate")]: formattedDate(rev?.dueDate) || "-",
         [key("status")]: renamedRevenuesStatus(rev?.status, currentLang) || "-",
         [key("agent")]: brokerName,
@@ -312,7 +313,7 @@ const Revenue = memo(({ refetchDetails, estateParentCompound, details }) => {
                         <tr key={rev._id}>
                           <td>{rev.tenant?.name}</td>
                           <td>{key(rev.type)}</td>
-                          <td>{rev.amount}</td>
+                          <td>{convertNumbersToFixedTwo(rev.amount)}</td>
                           <td>{formattedDate(rev.dueDate)}</td>
                           <td>
                             <span

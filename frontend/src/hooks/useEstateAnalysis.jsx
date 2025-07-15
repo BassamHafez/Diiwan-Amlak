@@ -19,48 +19,39 @@ const useEstateAnalysis = (estateData) => {
   const commissionPercentage = Number(estate?.commissionPercentage || 0);
   const estatePrice = Number(estate?.price || 0);
   const area = Number(estate?.area || 0);
-  const operatingRatio = convertNumbersToFixedTwo(commissionPercentage);
 
   const theCommissionVal = useMemo(() => {
     return totalPaidRev * (commissionPercentage / 100);
   }, [totalPaidRev, commissionPercentage]);
 
   const totalUnPaidCosts = useMemo(() => {
-    return convertNumbersToFixedTwo(totalEx - totalPaidEx);
+    return totalEx - totalPaidEx;
   }, [totalEx, totalPaidEx]);
 
   const collectionRatio = useMemo(() => {
-    return totalRev
-      ? convertNumbersToFixedTwo((totalPaidRev / totalRev) * 100)
-      : 0;
+    return totalRev ? (totalPaidRev / totalRev) * 100 : 0;
   }, [totalPaidRev, totalRev]);
 
   const grandReturns = useMemo(() => {
-    return estatePrice
-      ? convertNumbersToFixedTwo((totalPaidRev / estatePrice) * 100)
-      : 0;
+    return estatePrice ? (totalPaidRev / estatePrice) * 100 : 0;
   }, [estatePrice, totalPaidRev]);
 
   const netReturns = useMemo(() => {
     return estatePrice
-      ? convertNumbersToFixedTwo(
-          ((totalPaidRev - totalPaidEx - theCommissionVal) /
-            Number(estatePrice)) *
-            100
-        )
+      ? ((totalPaidRev - totalPaidEx - theCommissionVal) / estatePrice) * 100
       : 0;
   }, [totalPaidRev, totalPaidEx, theCommissionVal, estatePrice]);
 
   return {
-    totalPaidRev,
-    totalPendingRev,
-    totalPaidEx,
-    totalUnPaidCosts,
-    collectionRatio,
-    grandReturns,
-    netReturns,
-    area,
-    operatingRatio,
+    totalPaidRev: convertNumbersToFixedTwo(totalPaidRev),
+    totalPendingRev: convertNumbersToFixedTwo(totalPendingRev),
+    totalPaidEx: convertNumbersToFixedTwo(totalPaidEx),
+    totalUnPaidCosts: convertNumbersToFixedTwo(totalUnPaidCosts),
+    collectionRatio: convertNumbersToFixedTwo(collectionRatio),
+    grandReturns: convertNumbersToFixedTwo(grandReturns),
+    netReturns: convertNumbersToFixedTwo(netReturns),
+    area: convertNumbersToFixedTwo(area),
+    operatingRatio: convertNumbersToFixedTwo(commissionPercentage),
   };
 };
 

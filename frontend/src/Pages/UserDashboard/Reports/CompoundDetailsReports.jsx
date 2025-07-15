@@ -56,8 +56,8 @@ const CompoundDetailsReports = ({ compoundsOptions, filterType }) => {
       [key("region")]: compoundInfo?.region || "-",
       [key("totalProperties")]: compoundInfo?.estatesCount || "-",
       [`${key("collectionRatio")} (%)`]: collectionRatioVal || "-",
-      [key("theCommission")]: theCommissionVal || "0",
-      [key("netIncome")]: netIncomeVal || "-",
+      [key("theCommission")]: convertNumbersToFixedTwo(theCommissionVal) || "0",
+      [key("netIncome")]: convertNumbersToFixedTwo(netIncomeVal) || "-",
       [`${key("operatingRatio")} (%)`]:
         convertNumbersToFixedTwo(commissionPercentage) || "0",
       [`${key("netReturns")} (%)`]: netReturnsVal || "-",
@@ -99,8 +99,8 @@ const CompoundDetailsReports = ({ compoundsOptions, filterType }) => {
               <td>{compoundInfo?.region || "-"}</td>
               <td>{compoundInfo?.estatesCount || "-"}</td>
               <td>{collectionRatioVal || "-"}</td>
-              <td>{theCommissionVal || "0"}</td>
-              <td>{netIncomeVal || "-"}</td>
+              <td>{convertNumbersToFixedTwo(theCommissionVal) || "0"}</td>
+              <td>{convertNumbersToFixedTwo(netIncomeVal) || "-"}</td>
               <td>{convertNumbersToFixedTwo(commissionPercentage) || "0"}</td>
               <td>{netReturnsVal || "-"}</td>
             </tr>

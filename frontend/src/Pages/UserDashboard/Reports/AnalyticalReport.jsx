@@ -1,5 +1,6 @@
 import styles from "./Reports.module.css";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
@@ -52,10 +53,10 @@ const AnalyticalReport = ({
         [key("properties")]: ex?.compound || "-",
         [key("startDate")]: formattedDate(ex?.startDate || "-"),
         [key("endDate")]: formattedDate(ex?.endDate || "-"),
-        [key("totalIncome2")]: ex?.totalIncome || "-",
-        [key("totalExpenses")]: ex?.totalExpenses || "-",
+        [key("totalIncome2")]: convertNumbersToFixedTwo(ex?.totalIncome) || "-",
+        [key("totalExpenses")]: convertNumbersToFixedTwo(ex?.totalExpenses) || "-",
         [key("operatingRatio")]: ex?.operatingRatio || "-",
-        [key("netIncome")]: ex?.netIncome || "-",
+        [key("netIncome")]:convertNumbersToFixedTwo(ex?.netIncome)  || "-",
         [key("operatingRatioForNetIncome")]:
           ex?.operatingRatioForNetIncome || "-",
         [key("status")]: ex?.status || "-",
@@ -82,10 +83,10 @@ const AnalyticalReport = ({
                 <td>{item.compound || "-"}</td>
                 <td>{formattedDate(item.startDate || "-")}</td>
                 <td>{formattedDate(item.endDate || "-")}</td>
-                <td>{item.totalIncome}</td>
-                <td>{item.totalExpenses}</td>
+                <td>{convertNumbersToFixedTwo(item.totalIncome)}</td>
+                <td>{convertNumbersToFixedTwo(item.totalExpenses)}</td>
                 <td>{item.operatingRatio}</td>
-                <td>{item.netIncome}</td>
+                <td>{convertNumbersToFixedTwo(item.netIncome)}</td>
                 <td>{item.operatingRatioForNetIncome}</td>
                 <td>{item.status}</td>
               </tr>

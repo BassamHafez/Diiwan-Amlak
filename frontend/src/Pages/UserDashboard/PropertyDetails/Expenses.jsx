@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import LoadingOne from "../../../Components/UI/Loading/LoadingOne";
 import NoData from "../../../Components/UI/Blocks/NoData";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
@@ -184,7 +185,7 @@ const Expenses = ({
         [key("estate")]:
           estateParentCompound?.name || ex?.compound?.name || key("noCompound"),
         [key("type")]: key(ex.type) || "-",
-        [`${key("amount")} (${<span className="sar_font">$</span>})`]: ex?.amount || "-",
+        [key("amount")]: convertNumbersToFixedTwo(ex?.amount) || "-",
         [key("dueDate")]: formattedDate(ex?.dueDate) || "-",
         [key("status")]:
           renamedExpensesStatusMethod(ex.status, currentLang) || "-",
@@ -329,7 +330,7 @@ const Expenses = ({
                       {filteredExpenses.map((ex) => (
                         <tr key={ex._id}>
                           <td>{key(ex.type)}</td>
-                          <td>{ex.amount}</td>
+                          <td>{convertNumbersToFixedTwo(ex.amount)}</td>
                           <td>{formattedDate(ex.dueDate)}</td>
                           <td>
                             <span

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styles from "./Reports.module.css";
 import {
+  convertNumbersToFixedTwo,
   formattedDate,
   generatePDF,
   handleDownloadExcelSheet,
@@ -102,14 +103,14 @@ const LandlordReport = ({
         return {
           [key("category")]: key(ex?.category) || "-",
           [key("estate")]: ex?.estateName || "-",
-          [key("total")]: ex?.total || "-",
+          [key("total")]: convertNumbersToFixedTwo(ex?.total) || "-",
         };
       } else if (filterType === "incomeReportDetails") {
         return {
           [key("category")]: key(ex?.category) || "-",
           [key("estate")]: ex.estate?.name || ex.compound?.name || "-",
           [key("theTenant")]: ex.tenant?.name || "-",
-          [key("total")]: ex?.amount || "-",
+          [key("total")]: convertNumbersToFixedTwo(ex?.amount) || "-",
           [key("recDate")]: formattedDate(ex?.paidAt) || "-",
           [key("recMethod")]: key(ex?.paymentMethod) || "-",
         };
@@ -118,7 +119,7 @@ const LandlordReport = ({
           [key("category")]: key(ex?.category) || "-",
           [key("estate")]: ex.estate?.name || ex?.compound?.name || "-",
           [key("theTenant")]: ex?.tenant?.name || "-",
-          [key("total")]: ex?.amount || "-",
+          [key("total")]: convertNumbersToFixedTwo(ex?.amount) || "-",
           [key("dueDate")]: formattedDate(ex?.dueDate) || "-",
           [key("type")]: key(ex?.type) || "-",
           [key("status")]: key(ex?.status) || "-",
@@ -243,7 +244,7 @@ const LandlordReport = ({
                               : "text-success"
                           }`}
                         >
-                          {item.total}
+                          {convertNumbersToFixedTwo(item.total)}
                         </td>
                       </tr>
                     ) : filterType === "incomeReportDetails" ? (
@@ -261,7 +262,7 @@ const LandlordReport = ({
                               : "text-success"
                           }`}
                         >
-                          {item.amount}
+                          {convertNumbersToFixedTwo(item.amount)}
                         </td>
                         <td>{formattedDate(item.paidAt) || "-"}</td>
                         <td>{key(item.paymentMethod) || "-"}</td>
@@ -282,7 +283,7 @@ const LandlordReport = ({
                               : "text-success"
                           }`}
                         >
-                          {item.amount}
+                          {convertNumbersToFixedTwo(item.amount)}
                         </td>
                         <td>{key(item.status)}</td>
                         <td>{formattedDate(item.paidAt) || "-"}</td>
